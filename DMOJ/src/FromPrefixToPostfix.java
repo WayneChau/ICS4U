@@ -3,61 +3,57 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class FromPrefixToPostfix {
+	static int counterNum = 0;
+	static int counterSym = 0;
 
 	public static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String args[]) throws Exception {
+		
 		Scanner sc = new Scanner (System.in);
 		String answer = "";
 		System.out.println("Enter the arithmetic prefix expression -> ");
 		String number = sc.nextLine();
-	
-		answer += getNumber2(number, number);
-		answer.replaceAll(" ", "");
-		System.out.println(answer);
 
-
+		while (number != "0"){
+			answer += postfix(number);
+			answer.replaceAll(" ", "");
+			System.out.println(answer);
+			number = sc.nextLine();
+		}
 	}
-	
-	public static int helperMethod (String c) throws Exception {
-		 String count = "";
-		 for(int i = 0; i < c.length(); i++) {
-			 if (c.charAt(i) != '+' && c.charAt(i) != '-' && c.charAt(i) != ' ' && count.length() != 3) {
-					count += c.charAt(i);
-					
-				}
-			 else {
-				 
-			 }
+	public static int helperMethod (String c) throws Exception{
 		
-		 }
-		 return count.length();
-	 }
-
-	public static String getNumber2(String c, String count) throws Exception {
-		String output = "";
-		String symbol = "";
-		String store = "";
-		for(int i = 0; i < count.length(); i++) {
-			if (c.charAt(i) != '+' && c.charAt(i) != '-' && c.charAt(i) != ' ') {
-				output += c.charAt(i);
+		for(int i = 1; i < c.length(); i++) {
+			if (counterNum > counterSym) {
 			}
-			else if ( c == "0"){
-
+			else if(c.charAt(i) != '+' && c.charAt(i) != '-' && c.charAt(i) != ' ') {
+				counterNum++;
 			}
-			else if (c.charAt(i) == '+' || c.charAt(i) == '-') {
-				if(i == 0) {
-					store += c.charAt(i);
-				}
-				else {
-					symbol += c.charAt(i);
-				}
+			else {
+				counterSym++;
 			}
 		}
-		return output + symbol + store;
+		return counterNum + 1;
 	}
-	 
+
+	public static String postfix(String c) throws Exception{
+		String o = "";
+		String opd1 = "";
+		String opd2 = "";
+
+		if (c.charAt(0) != '+' && c.charAt(0) != '-' && c.charAt(0) != ' ') {
+			o += c.charAt(0);
+		}
+		else if (c.charAt(0) == '+' || c.charAt(0) == '-') {
+			opd1 = postfix(c.substring(1,helperMethod(c)));
+			opd2 = postfix(c.substring(helperMethod(c),c.length()));
+			o += opd1 + opd2 + c.charAt(0);
+		}
+		return o;
+	}
 }
+
 
 
 
