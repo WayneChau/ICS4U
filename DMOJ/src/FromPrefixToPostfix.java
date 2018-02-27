@@ -40,7 +40,7 @@ public class FromPrefixToPostfix {
 	public static String postfix(String c) throws Exception{
 		String o = "";
 		String opd1 = "";
-		String opd2 = "";
+		String opd2 = ""; 
 
 		if (c.charAt(0) != '+' && c.charAt(0) != '-' && c.charAt(0) != ' ') {
 			o += c.charAt(0);
