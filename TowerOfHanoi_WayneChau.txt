@@ -1,0 +1,35 @@
+Tower of Hanoi - Wayne Chau
+2. a) 
+1 Disk = 1 Move
+2 Disk = 3 Move
+3 Disk = 7 Move
+4 Disk = 15 Move
+5 Disk = 31 Move
+6 Disk = 63 Move
+
+Expression: Move = 2^n-1
+
+b)
+Solve(3,A,B,C)
+	Solve(2,A,C,B)
+		Solve(1,A,B,C)
+			Solve(0,A,C,B)
+			Move A to C
+			Solve(0,B,A,C)
+		Move A to B
+		Solve(1,C,A,B)
+			Solve(0,C,B,A)
+			Move C to B
+			Solve(0,A,C,B)
+	Move A to C
+	Solve(2,B,A,C)
+		Solve(1,B,C,A)
+			Solve(0,B,A,C)
+			Move B to A
+			Solve(0,C,B,A)
+		Move B to C
+		Solve(1,A,B,C)
+			Solve(0,A,C,B)
+			Move A to C
+			Solve(0,B,A,C)
+		
