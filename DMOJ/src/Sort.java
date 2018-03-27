@@ -220,4 +220,9 @@ public class Sort {
 		arr[index1] = arr[index2];
 		arr[index2] = temp;
 	}
+	
+	public static void  quickSort (int []arr) {
+		
+	}
+	
 }
