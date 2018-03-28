@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author WayneChau
  */
 public class Sort {
-	
+
 	/**
 	 * Tests if the methods work by printing the answers derived from the sorting methods.
 	 * @param args
@@ -19,13 +19,8 @@ public class Sort {
 		//String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
 
 		//selectionSort(arr);
-		insertionSort(arr);
+		quickSort(arr);
 		//bubbleSort(arr);
-		//for (int i = 0; i < arr.length; i++) {
-			//System.out.print(arr [i] + " ");
-		//}
-
-		bubbleSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr [i] + " ");
 		}
@@ -220,9 +215,48 @@ public class Sort {
 		arr[index1] = arr[index2];
 		arr[index2] = temp;
 	}
-	
-	public static void  quickSort (int []arr) {
-		
+
+	/**
+	 * Calls the quickSort method to sort the array using quick sort.
+	 * @param arr - The int array reference.
+	 * @return void
+	 */
+	public static void quickSort (int []arr) {
+		quickSort (arr, 0, arr.length-1);
 	}
 	
+	/**
+	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array.
+	 * @param arr - The int array reference
+	 * @param start - The beginning of the array excluding the pivot.
+	 * @param end - The end of the array excluding the pivot.
+	 * @return void
+	 */
+	private static void quickSort(int[]arr, int start, int end) {
+		//when array length is 1 value
+		if (end-start+1 == 0) {
+			return;
+		}
+		else {
+			int pivot = partition (arr, start, end);
+			quickSort (arr, start, pivot-1); //left side
+			quickSort (arr, pivot+1, end); //right side
+
+		}
+	}
+	private static int partition (int []arr, int start, int end) {
+		int i = start -1;
+		for (int j = start; j < end; j++) {
+			//rearrange smaller values to the left
+			if (arr[j] < arr[end]) {
+				i++;
+				swap (arr, i, j);
+			}
+		}
+			//places pivot in correct order within rearranged array 
+			swap (arr, i+1, end);
+		return i+1; //pivot value
+
+	}
+
 }
