@@ -14,9 +14,9 @@ public class Sort {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner (System.in);
 
-		int [] arr = {1,8,3,19,7};
+		//int [] arr = {1,8,3,19,7};
 		//double [] arr = {3.4,78.9,17.9,32.3,2.4};
-		//String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
+		String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
 
 		//selectionSort(arr);
 		quickSort(arr);
@@ -216,6 +216,7 @@ public class Sort {
 		arr[index2] = temp;
 	}
 
+	//int quickSort
 	/**
 	 * Calls the quickSort method to sort the array using quick sort.
 	 * @param arr - The int array reference.
@@ -226,7 +227,7 @@ public class Sort {
 	}
 	
 	/**
-	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array.
+	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
 	 * @param arr - The int array reference
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
@@ -241,9 +242,16 @@ public class Sort {
 			int pivot = partition (arr, start, end);
 			quickSort (arr, start, pivot-1); //left side
 			quickSort (arr, pivot+1, end); //right side
-
 		}
 	}
+	
+	/**
+	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
+	 * @param arr - The int array reference.
+	 * @param start - The beginning of the array excluding the pivot.
+	 * @param end - The end of the array excluding the pivot.
+	 * @return i+1 - pivot value
+	 */
 	private static int partition (int []arr, int start, int end) {
 		int i = start -1;
 		for (int j = start; j < end; j++) {
@@ -256,7 +264,106 @@ public class Sort {
 			//places pivot in correct order within rearranged array 
 			swap (arr, i+1, end);
 		return i+1; //pivot value
-
 	}
+
+	//double quickSort
+	/**
+	 * Calls the quickSort method to sort the array using quick sort.
+	 * @param arr - The double array reference.
+	 * @return void
+	 */
+	public static void quickSort (double []arr) {
+		quickSort (arr, 0, arr.length-1);
+	}
+	
+	/**
+	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
+	 * @param arr - The double array reference
+	 * @param start - The beginning of the array excluding the pivot.
+	 * @param end - The end of the array excluding the pivot.
+	 * @return void
+	 */
+	private static void quickSort(double[]arr, int start, int end) {
+		//when array length is 1 value
+		if (end-start+1 == 0) {
+			return;
+		}
+		else {
+			int pivot = partition (arr, start, end);
+			quickSort (arr, start, pivot-1); //left side
+			quickSort (arr, pivot+1, end); //right side
+		}
+	}
+	
+	/**
+	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
+	 * @param arr - The double array reference.
+	 * @param start - The beginning of the array excluding the pivot.
+	 * @param end - The end of the array excluding the pivot.
+	 * @return i+1 - pivot value
+	 */
+	private static int partition (double []arr, int start, int end) {
+		int i = start -1;
+		for (int j = start; j < end; j++) {
+			//rearrange smaller values to the left
+			if (arr[j] < arr[end]) {
+				i++;
+				swap (arr, i, j);
+			}
+		}
+			//places pivot in correct order within rearranged array 
+			swap (arr, i+1, end);
+		return i+1; //pivot value
+	}
+	
+	//String quickSort
+		/**
+		 * Calls the quickSort method to sort the array using quick sort.
+		 * @param arr - The double array reference.
+		 * @return void
+		 */
+		public static void quickSort (String []arr) {
+			quickSort (arr, 0, arr.length-1);
+		}
+		
+		/**
+		 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
+		 * @param arr - The double array reference
+		 * @param start - The beginning of the array excluding the pivot.
+		 * @param end - The end of the array excluding the pivot.
+		 * @return void
+		 */
+		private static void quickSort(String[]arr, int start, int end) {
+			//when array length is 1 value
+			if (end-start+1 == 0) {
+				return;
+			}
+			else {
+				int pivot = partition (arr, start, end);
+				quickSort (arr, start, pivot-1); //left side
+				quickSort (arr, pivot+1, end); //right side
+			}
+		}
+		
+		/**
+		 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
+		 * @param arr - The double array reference.
+		 * @param start - The beginning of the array excluding the pivot.
+		 * @param end - The end of the array excluding the pivot.
+		 * @return i+1 - pivot value
+		 */
+		private static int partition (String []arr, int start, int end) {
+			int i = start -1;
+			for (int j = start; j < end; j++) {
+				//rearrange smaller values to the left
+				if (arr[j].compareTo(arr[end]) < 0) {
+					i++;
+					swap (arr, i, j);
+				}
+			}
+				//places pivot in correct order within rearranged array 
+				swap (arr, i+1, end);
+			return i+1; //pivot value
+		}
 
 }
