@@ -14,12 +14,12 @@ public class Sort {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner (System.in);
 
-		int [] arr = {1,8,3,19,7};
+		//int [] arr = {1,8,3,19,7,3003,3004,3002,42,897};
 		//double [] arr = {3.4,78.9,17.9,32.3,2.4};
-		//String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
+		String [] arr = {"Hello","Cat","Dog","Rat","Eagle","Zed","Apple"};
 
 		//selectionSort(arr);
-		mergeSort(arr);
+		quickSort(arr);
 		//bubbleSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr [i] + " ");
@@ -319,7 +319,7 @@ public class Sort {
 	//String quickSort
 	/**
 	 * Calls the quickSort method to sort the array using quick sort.
-	 * @param arr - The double array reference.
+	 * @param arr - The String array reference.
 	 * @return void
 	 */
 	public static void quickSort (String []arr) {
@@ -328,7 +328,7 @@ public class Sort {
 
 	/**
 	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
-	 * @param arr - The double array reference
+	 * @param arr - The String array reference
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return void
@@ -347,7 +347,7 @@ public class Sort {
 
 	/**
 	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
-	 * @param arr - The double array reference.
+	 * @param arr - The String array reference.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return i+1 - pivot value
@@ -372,16 +372,23 @@ public class Sort {
 	 * @return void
 	 */
 	public static void mergeSort (int []arr) {
-		mergeSort (arr,0, arr.length);
+		mergeSort (arr,0, arr.length-1);
 	}
 
+	/**
+	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
+	 * @param arr - The int array reference.
+	 * @param start - The beginning position of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
 	private static void mergeSort (int []arr, int start, int end) {
 		//when array length is 1 value
-		if (end-start+1==0) {
+		if (end-start+1 == 0) {
 			return;
 		}
 		else if (start < end) {
-			int mid = (start+end)/2;//Split array in halves
+			int mid = start + (end-start)/2;//Split array in halves
 			mergeSort (arr, start, mid); //left side
 			mergeSort (arr, mid+1, end); //right side
 			merge (arr, start, mid, end); //merge halves
@@ -389,18 +396,216 @@ public class Sort {
 
 	}
 
+	/**
+	 * Merges the split halves of the arrays together in correct order.
+	 * @param arr - The int array reference.
+	 * @param start - The beginning position of the array.
+	 * @param mid - The position of the middle element of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
 	private static void merge(int[]arr, int start, int mid, int end) {
-		int counter=0;
-		for (int i= start; i <=mid; i++) {
-			for (int j=mid+1; j<=end; j++) {
-				if (arr[i] < arr[j]) {
-					arr[counter] = arr[i];
-				}
-				else {
-					arr[counter]= arr[j];
-				}
-				counter++;
+		int[] tempArr = new int[end - start + 1];
+		int m = 0;
+		for (int n = start; n <= end; n++) {
+			tempArr[m] = arr[n]; //places the array into a new array
+			m++;
+		}
+		int i = start; //start of left side
+		int j = mid + 1; //start of right side
+		int l = 0; //beginning of the new array
+		//comparing both side, left & right, to provide smallest element first to be implemented into the new array
+		while (i <= mid && j <= end) {
+			if (arr[i] < arr[j]) {
+				tempArr[l] = arr[i];
+				i++;
+				l++;
 			}
+			else {
+				tempArr[l] = arr[j];
+				j++;
+				l++;
+			}
+		}
+		//transfer the largest of the left side of the array into the new array
+		while (i <= mid) {
+			tempArr[l] = arr[i];
+			i++;
+			l++;
+		}
+		//transfer the largest of the right side of the array into the new array
+		while (j <= end) {
+			tempArr[l] = arr[j];
+			j++;
+			l++;
+		}
+		//Copies the new merged array into the original array
+		m=0;
+		for (int n = start; n <= end; n++) {
+			arr[n] = tempArr[m];
+			m++;
+		}
+	}
+	
+	/**
+	 * Calls the mergeSort method to sort the array using merge sort.
+	 * @param arr - The double array reference.
+	 * @return void
+	 */
+	public static void mergeSort (double []arr) {
+		mergeSort (arr,0, arr.length-1);
+	}
+
+	/**
+	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
+	 * @param arr - The double array reference.
+	 * @param start - The beginning position of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
+	private static void mergeSort (double []arr, int start, int end) {
+		//when array length is 1 value
+		if (end-start+1 == 0) {
+			return;
+		}
+		else if (start < end) {
+			int mid = start + (end-start)/2;//Split array in halves
+			mergeSort (arr, start, mid); //left side
+			mergeSort (arr, mid+1, end); //right side
+			merge (arr, start, mid, end); //merge halves
+		}
+
+	}
+
+	/**
+	 * Merges the split halves of the arrays together in correct order.
+	 * @param arr - The double array reference.
+	 * @param start - The beginning position of the array.
+	 * @param mid - The position of the middle element of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
+	private static void merge(double[]arr, int start, int mid, int end) {
+		double[] tempArr = new double[end - start + 1];
+		int m = 0;
+		for (int n = start; n <= end; n++) {
+			tempArr[m] = arr[n]; //places the array into a new array
+			m++;
+		}
+		int i = start; //start of left side
+		int j = mid + 1; //start of right side
+		int l = 0; //beginning of the new array
+		//comparing both side, left & right, to provide smallest element first to be implemented into the new array
+		while (i <= mid && j <= end) {
+			if (arr[i] < arr[j]) {
+				tempArr[l] = arr[i];
+				i++;
+				l++;
+			}
+			else {
+				tempArr[l] = arr[j];
+				j++;
+				l++;
+			}
+		}
+		//transfer the largest of the left side of the array into the new array
+		while (i <= mid) {
+			tempArr[l] = arr[i];
+			i++;
+			l++;
+		}
+		//transfer the largest of the right side of the array into the new array
+		while (j <= end) {
+			tempArr[l] = arr[j];
+			j++;
+			l++;
+		}
+		//Copies the new merged array into the original array
+		m=0;
+		for (int n = start; n <= end; n++) {
+			arr[n] = tempArr[m];
+			m++;
+		}
+	}
+	
+	/**
+	 * Calls the mergeSort method to sort the array using merge sort.
+	 * @param arr - The String array reference.
+	 * @return void
+	 */
+	public static void mergeSort (String []arr) {
+		mergeSort (arr,0, arr.length-1);
+	}
+
+	/**
+	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
+	 * @param arr - The String array reference.
+	 * @param start - The beginning position of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
+	private static void mergeSort (String []arr, int start, int end) {
+		//when array length is 1 value
+		if (end-start+1 == 0) {
+			return;
+		}
+		else if (start < end) {
+			int mid = start + (end-start)/2;//Split array in halves
+			mergeSort (arr, start, mid); //left side
+			mergeSort (arr, mid+1, end); //right side
+			merge (arr, start, mid, end); //merge halves
+		}
+
+	}
+
+	/**
+	 * Merges the split halves of the arrays together in correct order.
+	 * @param arr - The String array reference.
+	 * @param start - The beginning position of the array.
+	 * @param mid - The position of the middle element of the array.
+	 * @param end - The final position of the array.
+	 * @return void
+	 */
+	private static void merge(String[]arr, int start, int mid, int end) {
+		String[] tempArr = new String[end - start + 1];
+		int m = 0;
+		for (int n = start; n <= end; n++) {
+			tempArr[m] = arr[n]; //places the array into a new array
+			m++;
+		}
+		int i = start; //start of left side
+		int j = mid + 1; //start of right side
+		int l = 0; //beginning of the new array
+		//comparing both side, left & right, to provide smallest element first to be implemented into the new array
+		while (i <= mid && j <= end) {
+			if (arr[i].compareTo(arr[j]) < 0 ) {
+				tempArr[l] = arr[i];
+				i++;
+				l++;
+			}
+			else {
+				tempArr[l] = arr[j];
+				j++;
+				l++;
+			}
+		}
+		//transfer the largest of the left side of the array into the new array
+		while (i <= mid) {
+			tempArr[l] = arr[i];
+			i++;
+			l++;
+		}
+		//transfer the largest of the right side of the array into the new array
+		while (j <= end) {
+			tempArr[l] = arr[j];
+			j++;
+			l++;
+		}
+		//Copies the new merged array into the original array
+		m=0;
+		for (int n = start; n <= end; n++) {
+			arr[n] = tempArr[m];
+			m++;
 		}
 	}
 
