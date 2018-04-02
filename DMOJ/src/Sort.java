@@ -14,12 +14,12 @@ public class Sort {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner (System.in);
 
-		//int [] arr = {1,8,3,19,7};
+		int [] arr = {1,8,3,19,7};
 		//double [] arr = {3.4,78.9,17.9,32.3,2.4};
-		String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
+		//String [] arr = {"Hello","Cat","Dog","Rat","Eagle"};
 
 		//selectionSort(arr);
-		quickSort(arr);
+		mergeSort(arr);
 		//bubbleSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr [i] + " ");
@@ -366,19 +366,42 @@ public class Sort {
 		return i+1; //pivot value
 	}
 
+	/**
+	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
+	 * @param arr - The int array reference.
+	 * @return void
+	 */
 	public static void mergeSort (int []arr) {
 		mergeSort (arr,0, arr.length);
 	}
 
 	private static void mergeSort (int []arr, int start, int end) {
+		//when array length is 1 value
 		if (end-start+1==0) {
 			return;
 		}
-		else {
-			mergeSort (arr, start, end);
+		else if (start < end) {
+			int mid = (start+end)/2;//Split array in halves
+			mergeSort (arr, start, mid); //left side
+			mergeSort (arr, mid+1, end); //right side
+			merge (arr, start, mid, end); //merge halves
 		}
 
 	}
 
+	private static void merge(int[]arr, int start, int mid, int end) {
+		int counter=0;
+		for (int i= start; i <=mid; i++) {
+			for (int j=mid+1; j<=end; j++) {
+				if (arr[i] < arr[j]) {
+					arr[counter] = arr[i];
+				}
+				else {
+					arr[counter]= arr[j];
+				}
+				counter++;
+			}
+		}
+	}
 
 }
