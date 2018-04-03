@@ -14,12 +14,12 @@ public class Sort {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner (System.in);
 
-		//int [] arr = {1,8,3,19,7,3003,3004,3002,42,897};
+		//int [] arr = {1,8,3,19,7,3003,3004,3002,42,897,98,12,3};
 		//double [] arr = {3.4,78.9,17.9,32.3,2.4};
 		String [] arr = {"Hello","Cat","Dog","Rat","Eagle","Zed","Apple"};
 
 		//selectionSort(arr);
-		quickSort(arr);
+		mergeSort(arr);
 		//bubbleSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr [i] + " ");
@@ -384,10 +384,10 @@ public class Sort {
 	 */
 	private static void mergeSort (int []arr, int start, int end) {
 		//when array length is 1 value
-		if (end-start+1 == 0) {
+		if (end-start+1 == 1) {
 			return;
 		}
-		else if (start < end) {
+		else {
 			int mid = start + (end-start)/2;//Split array in halves
 			mergeSort (arr, start, mid); //left side
 			mergeSort (arr, mid+1, end); //right side
@@ -465,10 +465,10 @@ public class Sort {
 	 */
 	private static void mergeSort (double []arr, int start, int end) {
 		//when array length is 1 value
-		if (end-start+1 == 0) {
+		if (end-start+1 == 1) {
 			return;
 		}
-		else if (start < end) {
+		else {
 			int mid = start + (end-start)/2;//Split array in halves
 			mergeSort (arr, start, mid); //left side
 			mergeSort (arr, mid+1, end); //right side
@@ -546,10 +546,10 @@ public class Sort {
 	 */
 	private static void mergeSort (String []arr, int start, int end) {
 		//when array length is 1 value
-		if (end-start+1 == 0) {
+		if (end-start+1 == 1) {
 			return;
 		}
-		else if (start < end) {
+		else {
 			int mid = start + (end-start)/2;//Split array in halves
 			mergeSort (arr, start, mid); //left side
 			mergeSort (arr, mid+1, end); //right side
