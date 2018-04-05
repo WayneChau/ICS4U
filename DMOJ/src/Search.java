@@ -1,5 +1,6 @@
 import java.util.Scanner;
 /**
+ * Search.java
  * Searches for the target number within the sorted array using different method of searches.
  * April 4th, 2018
  * @author WayneChau
