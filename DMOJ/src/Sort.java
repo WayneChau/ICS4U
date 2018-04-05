@@ -27,7 +27,7 @@ public class Sort {
 	}
 	/**
 	 * Determines the smallest value in the array and swaps it with the first value. Repeats with the next value in the array until the array is rearranged correctly.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @return void
 	 */
 	public static void selectionSort(int [] arr) {
@@ -45,7 +45,7 @@ public class Sort {
 
 	/**
 	 * Swaps one value with another value in the array.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @param index1 - The position of one value in the array.
 	 * @param index2 - The position of the other value in the array.
 	 */
@@ -57,7 +57,7 @@ public class Sort {
 
 	/**
 	 * Determines the smallest value in the array and swaps it with the first value. Repeats with the next value in the array until the array is rearranged correctly.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @return void
 	 */
 	public static void selectionSort(double [] arr) {
@@ -76,7 +76,7 @@ public class Sort {
 
 	/**
 	 * Swaps one value with another value in the array.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @param index1 - The position of one value in the array.
 	 * @param index2 - The position of the other value in the array.
 	 * return void
@@ -89,7 +89,7 @@ public class Sort {
 
 	/**
 	 * Determines the smallest value in the array and swaps it with the first value. Repeats with the next value in the array until the array is rearranged correctly.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @return void
 	 */
 	public static void selectionSort(String [] arr) {
@@ -107,7 +107,7 @@ public class Sort {
 
 	/**
 	 * Skips the first value considered as sub-sorted and starts with the second value. Place the value in the proper position moving sub-sorted list as necessary. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @return void
 	 */
 	public static void insertionSort(int [] arr) {
@@ -123,7 +123,7 @@ public class Sort {
 
 	/**
 	 * Skips the first value considered as sub-sorted and starts with the second value. Place the value in the proper position moving sub-sorted list as necessary. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @return void
 	 */
 	public static void insertionSort(double [] arr) {
@@ -141,7 +141,7 @@ public class Sort {
 
 	/**
 	 * Skips the first value considered as sub-sorted and starts with the second value. Place the value in the proper position moving sub-sorted list as necessary. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @return void
 	 */
 	public static void insertionSort(String [] arr) {
@@ -159,7 +159,7 @@ public class Sort {
 
 	/**
 	 * Compares the first value with the value on the right. The highest value is swapped to the highest position in the array. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @return void
 	 */
 	public static void bubbleSort(int [] arr) {
@@ -175,7 +175,7 @@ public class Sort {
 
 	/**
 	 * Compares the first value with the value on the right. The highest value is swapped to the highest position in the array. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @return void
 	 */
 	public static void bubbleSort(double [] arr) {
@@ -190,7 +190,7 @@ public class Sort {
 
 	/**
 	 * Compares the first value with the value on the right. The highest value is swapped to the highest position in the array. Repeats with the next value until the array is rearranged correctly.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @return void
 	 */
 	public static void bubbleSort(String [] arr) {
@@ -205,7 +205,7 @@ public class Sort {
 
 	/**
 	 * Swaps one value with another value in the array.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @param index1 - The position of one value in the array.
 	 * @param index2 - The position of the other value in the array.
 	 * @return void
@@ -219,7 +219,7 @@ public class Sort {
 	//int quickSort
 	/**
 	 * Calls the quickSort method to sort the array using quick sort.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @return void
 	 */
 	public static void quickSort (int []arr) {
@@ -228,7 +228,7 @@ public class Sort {
 
 	/**
 	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
-	 * @param arr - The int array reference
+	 * @param arr - The int array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return void
@@ -247,7 +247,7 @@ public class Sort {
 
 	/**
 	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return i+1 - pivot value
@@ -269,7 +269,7 @@ public class Sort {
 	//double quickSort
 	/**
 	 * Calls the quickSort method to sort the array using quick sort.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @return void
 	 */
 	public static void quickSort (double []arr) {
@@ -278,7 +278,7 @@ public class Sort {
 
 	/**
 	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
-	 * @param arr - The double array reference
+	 * @param arr - The double array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return void
@@ -297,7 +297,7 @@ public class Sort {
 
 	/**
 	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return i+1 - pivot value
@@ -319,7 +319,7 @@ public class Sort {
 	//String quickSort
 	/**
 	 * Calls the quickSort method to sort the array using quick sort.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @return void
 	 */
 	public static void quickSort (String []arr) {
@@ -328,7 +328,7 @@ public class Sort {
 
 	/**
 	 * Pick a pivot value and partition the array so that larger are on the right and smaller are on the left to allow the pivot to be in the correct position in the array. Repeat with left side and right side.
-	 * @param arr - The String array reference
+	 * @param arr - The String array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return void
@@ -347,7 +347,7 @@ public class Sort {
 
 	/**
 	 * Values smaller than the pivot are placed to the left and values larger than the pivot are placed to the right.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @param start - The beginning of the array excluding the pivot.
 	 * @param end - The end of the array excluding the pivot.
 	 * @return i+1 - pivot value
@@ -368,7 +368,7 @@ public class Sort {
 
 	/**
 	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @return void
 	 */
 	public static void mergeSort (int []arr) {
@@ -377,7 +377,7 @@ public class Sort {
 
 	/**
 	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param end - The final position of the array.
 	 * @return void
@@ -398,7 +398,7 @@ public class Sort {
 
 	/**
 	 * Merges the split halves of the arrays together in correct order.
-	 * @param arr - The int array reference.
+	 * @param arr - The int array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param mid - The position of the middle element of the array.
 	 * @param end - The final position of the array.
@@ -449,7 +449,7 @@ public class Sort {
 	
 	/**
 	 * Calls the mergeSort method to sort the array using merge sort.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @return void
 	 */
 	public static void mergeSort (double []arr) {
@@ -458,7 +458,7 @@ public class Sort {
 
 	/**
 	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param end - The final position of the array.
 	 * @return void
@@ -479,7 +479,7 @@ public class Sort {
 
 	/**
 	 * Merges the split halves of the arrays together in correct order.
-	 * @param arr - The double array reference.
+	 * @param arr - The double array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param mid - The position of the middle element of the array.
 	 * @param end - The final position of the array.
@@ -530,7 +530,7 @@ public class Sort {
 	
 	/**
 	 * Calls the mergeSort method to sort the array using merge sort.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @return void
 	 */
 	public static void mergeSort (String []arr) {
@@ -539,7 +539,7 @@ public class Sort {
 
 	/**
 	 * Splits the array into halves until it cannot be done anymore. The halves then merge, rearranging the halves in correct order until the initial array is completely sorted in correct order.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param end - The final position of the array.
 	 * @return void
@@ -560,7 +560,7 @@ public class Sort {
 
 	/**
 	 * Merges the split halves of the arrays together in correct order.
-	 * @param arr - The String array reference.
+	 * @param arr - The String array being sorted in correct order.
 	 * @param start - The beginning position of the array.
 	 * @param mid - The position of the middle element of the array.
 	 * @param end - The final position of the array.
