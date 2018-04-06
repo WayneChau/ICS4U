@@ -48,6 +48,7 @@ public class Sort {
 	 * @param arr - The int array being sorted in correct order.
 	 * @param index1 - The position of one value in the array.
 	 * @param index2 - The position of the other value in the array.
+	 * @return void
 	 */
 	private static void swap (int [] arr, int index1, int index2) {
 		int temp = arr[index1];
@@ -79,7 +80,7 @@ public class Sort {
 	 * @param arr - The double array being sorted in correct order.
 	 * @param index1 - The position of one value in the array.
 	 * @param index2 - The position of the other value in the array.
-	 * return void
+	 * @return void
 	 */
 	private static void swap (double [] arr, int index1, int index2) {
 		double temp = arr[index1];
