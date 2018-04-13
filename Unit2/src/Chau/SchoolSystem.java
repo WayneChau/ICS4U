@@ -9,21 +9,34 @@ import java.util.Scanner;
  * @author WayneChau
  */
 public class SchoolSystem {
-	
+
 	//Global
 	static Scanner sc = new Scanner(System.in);
-	
+
 	/**
 	 * The entry point to the program
 	 * @param args unused
 	 */
 	public static void main(String[] args) {
-		System.out.println("Press 1 - Enter New Record" + "\n Press 2 - Print to Screen" + "\nPress 3 - Quit");
-		Student r1 = createRecord();	// creates two new records
-		printRecord(r1);
+		System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print to Screen" + "\nPress 3 - Quit");
+		String option = sc.nextLine();
+		while(!option.equals("1")||!option.equals("2")||!option.equals("3")) {
+			option = sc.nextLine();
+			if (option.equals("1")){
+				Student r1 = createRecord();	// creates two new records
+			}
+			else if (option.equals("2")){
+				printRecord(r1);
+			}
+			else if (option.equals("3")){
+				
+			}
+
+		}
+
 
 	}
-	
+
 	/**
 	 * This method will get the information required to set the fields in
 	 * the record.
@@ -59,10 +72,10 @@ public class SchoolSystem {
 			System.out.println("The value entered has to be digits. Please enter the student's grade:");
 			r.setGradeStudent(sc.nextInt());
 		}
-		
+
 		return r;
 	}
-	
+
 	/**
 	 * The method prints the given Student to the screen in a nicely formatted manner.
 	 * @param r - the Student to print
