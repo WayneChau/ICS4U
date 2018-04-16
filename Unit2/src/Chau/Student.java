@@ -1,10 +1,15 @@
 package Chau;
 
-
+/**
+ * Student.java
+ * Gathers information
+ * April 13th, 2018
+ * @author WayneChau
+ */
 public class Student {
 
-		private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province, phoneNumber;
-		private int studentNumber, gradeStudent;
+		private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province;
+		private int studentNumber, gradeStudent, phoneNumber;
 		
 		/**
 		 * Returns the first name of this Student
@@ -160,14 +165,14 @@ public class Student {
 		 * Returns the phone number of this Student
 		 * @return the phone number 
 		 */
-		public String getPhoneNumber() {
+		public int getPhoneNumber() {
 			return phoneNumber;
 		}
 		/**
 		 * Sets the phone number of the song for this Student
 		 * @param phone number the phone number to set
 		 */
-		public void setPhoneNumber(String phoneNumber) {
+		public void setPhoneNumber(int phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
 
