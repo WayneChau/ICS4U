@@ -19,7 +19,7 @@ public class SchoolSystem {
 	 * @param args unused
 	 */
 	public static void main(String[] args) {
-		int option = 0;
+		int option = 0; //command chosen
 		int idx1 = 0; //index of student to input information
 		int idx2 = 0; //Print index of student
 		Student [] Student = new Student [100];
