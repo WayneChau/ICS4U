@@ -13,6 +13,35 @@ public class Student {
 		private long phoneNumber;
 		
 		/**
+		 * Initialize the fields of an object
+		 * @param firstName - first name the first name to set
+		 * @param lastName - last name the last name to set
+		 * @param middleInitial - middle initial the middle initial to set
+		 * @param email - email the email to set
+		 * @param streetAddress - street address the street address to set
+		 * @param city - city the city to set
+		 * @param postalCode - postal code the postal code to set
+		 * @param province - province the province to set
+		 * @param studentNumber - student number the student number to set
+		 * @param gradeStudent - grade the grade to set
+		 * @param phoneNumber - phone number the phone number to set
+		 */
+		public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province, int studentNumber, int gradeStudent, long phoneNumber) {
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.middleInitial = middleInitial;
+			this.email = email;
+			this.streetAddress = streetAddress;
+			this.city = city;
+			this.postalCode = postalCode;
+			this.province = province;
+			this.studentNumber = studentNumber;
+			this.gradeStudent = gradeStudent;
+			this.phoneNumber = phoneNumber;
+		}
+		
+		/**
 		 * Returns the first name of this Student
 		 * @return the first name 
 		 */

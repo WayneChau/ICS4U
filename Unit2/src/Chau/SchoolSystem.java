@@ -114,27 +114,28 @@ public class SchoolSystem {
 	 * @param r - the Student to get data for
 	 */
 	public static Student createRecord() {
-		Student r = new Student();	
+		
 		System.out.println("Please enter the student's first name:");
-		r.setFirstName(sc.nextLine());
+		String FirstName = sc.nextLine();
 		System.out.println("Please enter the student's last name:");
-		r.setLastName(sc.nextLine());
+		String LastName = sc.nextLine();
 		System.out.println("Please enter the student's middle initial:");
-		r.setMiddleInitial(sc.nextLine());
+		String MiddleInitial = sc.nextLine();
 		System.out.println("Please enter the student's email:");
-		r.setEmail(sc.nextLine());
+		String Email = sc.nextLine();
 		System.out.println("Please enter the student's street address:");
-		r.setStreetAddress(sc.nextLine());
+		String StreetAddress = sc.nextLine();
 		System.out.println("Please enter the student's city:");
-		r.setCity(sc.nextLine());
+		String City = sc.nextLine();
 		System.out.println("Please enter the student's postal code:");
-		r.setPostalCode(sc.nextLine());
+		String PostalCode = sc.nextLine();
 		System.out.println("Please enter the student's province:");
-		r.setProvince(sc.nextLine());
+		String Province = sc.nextLine();
 		System.out.println("Please enter the student's phone number:");	
+		long PhoneNumber = 0;
 		do {
 			try {
-				r.setPhoneNumber(sc.nextLong());
+				PhoneNumber = sc.nextLong();
 				error = false;
 			} catch(InputMismatchException e){
 				System.out.println("The value entered has to be digits. Please enter the student's student number:");
@@ -143,9 +144,10 @@ public class SchoolSystem {
 			}
 		}while(error == true);
 		System.out.println("Please enter the student's student number:");
+		int StudentNumber = 0;
 		do {
 			try {
-				r.setStudentNumber(sc.nextInt());
+				StudentNumber = sc.nextInt();
 				error = false;
 			} catch(InputMismatchException e){
 				System.out.println("The value entered has to be digits. Please enter the student's student number:");
@@ -154,9 +156,10 @@ public class SchoolSystem {
 			}
 		}while(error == true);
 		System.out.println("Please enter the student's grade:");
+		int GradeStudent = 0;
 		do {
 			try {
-				r.setGradeStudent(sc.nextInt());
+				GradeStudent = sc.nextInt();
 				error = false;
 			} catch(InputMismatchException e){
 				System.out.println("The value entered has to be digits. Please enter the student's grade:");
@@ -164,7 +167,7 @@ public class SchoolSystem {
 				error = true;
 			}
 		}while(error == true);
-		
+		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
 		return r;
 	}
 
