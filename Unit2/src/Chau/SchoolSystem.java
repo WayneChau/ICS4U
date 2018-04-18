@@ -138,7 +138,7 @@ public class SchoolSystem {
 				PhoneNumber = sc.nextLong();
 				error = false;
 			} catch(InputMismatchException e){
-				System.out.println("The value entered has to be digits. Please enter the student's student number:");
+				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
 				sc.nextLine();
 				error = true;
 			}
