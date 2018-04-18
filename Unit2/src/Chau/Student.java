@@ -9,7 +9,8 @@ package Chau;
 public class Student {
 
 		private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province;
-		private int studentNumber, gradeStudent, phoneNumber;
+		private int studentNumber, gradeStudent;
+		private long phoneNumber;
 		
 		/**
 		 * Returns the first name of this Student
@@ -165,14 +166,14 @@ public class Student {
 		 * Returns the phone number of this Student
 		 * @return the phone number 
 		 */
-		public int getPhoneNumber() {
+		public long getPhoneNumber() {
 			return phoneNumber;
 		}
 		/**
 		 * Sets the phone number of the song for this Student
 		 * @param phone number the phone number to set
 		 */
-		public void setPhoneNumber(int phoneNumber) {
+		public void setPhoneNumber(long phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
 

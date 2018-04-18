@@ -131,13 +131,13 @@ public class SchoolSystem {
 		r.setPostalCode(sc.nextLine());
 		System.out.println("Please enter the student's province:");
 		r.setProvince(sc.nextLine());
-		System.out.println("Please enter the student's phone number:");
+		System.out.println("Please enter the student's phone number:");	
 		do {
 			try {
-				r.setPhoneNumber(sc.nextInt());
+				r.setPhoneNumber(sc.nextLong());
 				error = false;
 			} catch(InputMismatchException e){
-				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
+				System.out.println("The value entered has to be digits. Please enter the student's student number:");
 				sc.nextLine();
 				error = true;
 			}
@@ -164,7 +164,7 @@ public class SchoolSystem {
 				error = true;
 			}
 		}while(error == true);
-
+		
 		return r;
 	}
 
