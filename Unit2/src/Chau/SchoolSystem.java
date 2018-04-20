@@ -18,8 +18,9 @@ public class SchoolSystem {
 	/**
 	 * The entry point to the program
 	 * @param args unused
+	 * @throws InvalidInputException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidInputException {
 		int option = 0; //command chosen
 		int idx1 = 0; //index of student to input information
 		int idx2 = 0; //Print index of student 
@@ -112,9 +113,9 @@ public class SchoolSystem {
 	 * This method will get the information required to set the fields in
 	 * the record.
 	 * @param r - the Student to get data for
+	 * @throws InvalidInputException 
 	 */
-	public static Student createRecord() {
-		
+	public static Student createRecord() throws InvalidInputException {
 		System.out.println("Please enter the student's first name:");
 		String FirstName = sc.nextLine();
 		System.out.println("Please enter the student's last name:");
@@ -167,7 +168,12 @@ public class SchoolSystem {
 				error = true;
 			}
 		}while(error == true);
-		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
+		Student r = null;
+		try {
+		r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
+		} catch (InvalidInputException e) {
+			System.out.println(e.getMessage());
+		}
 		return r;
 	}
 
