@@ -1,5 +1,6 @@
 package Chau;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ public class SchoolSystem {
 	//Global
 	static Scanner sc = new Scanner(System.in);
 	static boolean error = false; //if error is repeated
+	static ArrayList <Student> studRecs = new ArrayList <Student>();
 
 	/**
 	 * The entry point to the program
@@ -22,21 +24,17 @@ public class SchoolSystem {
 	 */
 	public static void main(String[] args) throws InvalidInputException {
 		int option = 0; //command chosen
-		int idx1 = 0; //index of student to input information
-		int idx2 = 0; //Print index of student 
-		int counter = -1; //counts how many student(s) to choose from
-		Student [] Student = new Student [100];
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
-			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print to Screen" + "\nPress 3 - Quit");
+			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
 			option = 0;
 			do {
 				try {
 					option = sc.nextInt();
 					error = false;
 				} 
-				catch(InputMismatchException e){
-					System.out.println("Please chose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print to Screen" + "\nPress 3 - Quit");
+				catch(Exception e){
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
 					sc.nextLine();
 					error = true;
 				}
@@ -45,13 +43,13 @@ public class SchoolSystem {
 			sc.nextLine();
 			//checks if any of the three options are inputed, reads again to obtain a command
 			while(option != 1 && option != 2 && option != 3) {
-				System.out.println("Please chose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print to Screen" + "\nPress 3 - Quit");
+				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
 				do {
 					try {
 						option = sc.nextInt();
 						error = false;
-					} catch(InputMismatchException e){
-						System.out.println("Please chose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print to Screen" + "\nPress 3 - Quit");
+					} catch(Exception e){
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
 						sc.nextLine();
 						error = true;
 					}
@@ -59,49 +57,10 @@ public class SchoolSystem {
 				sc.nextLine();
 			}
 			if (option == 1){
-				Student [idx1] = createRecord(); // creates two new records
-				counter++;
-				idx1++;
+				studRecs.add(createRecord()); // creates two new records
 			}
 			if (option == 2){
-				if (counter > 0) {
-					//different students to choose from to print
-					System.out.println("Which student do you want to print? Choose from: 0 to " + counter);
-					do {
-						try {
-							idx2 = sc.nextInt();
-							error = false;
-						} catch(InputMismatchException e){
-							System.out.println("Please enter the student number you desire to print. Choose from: 0 to " + counter);
-							sc.nextLine();
-							error = true;
-						}
-					}while(error == true);
-					sc.nextLine();
-					//if the student information requested does not exist in the database
-					while (idx2 < 0 || idx2 > counter) {
-						System.out.println("The student does not exist in the database. Please enter the student number you desire to print. Choose from: 0 to " + counter);
-						do {
-							try {
-								idx2 = sc.nextInt();
-								error = false;
-							} catch(InputMismatchException e){
-								System.out.println("The student does not exist in the database. Please enter the student number you desire to print. Choose from: 0 to " + counter);
-								sc.nextLine();
-								error = true;
-							}
-						}while(error == true);
-					}
-					printRecord(Student [idx2]);
-				}
-				if (counter == 0) {
-					//only one student to print
-					System.out.println("The only student in the database.");
-					printRecord(Student [0]);
-				}
-				if (counter == -1) {
-					System.out.println("There are no information of any student in the database.");
-				}
+				printRecords();
 			}
 			//quits the program
 		}while (option != 3);
@@ -138,7 +97,7 @@ public class SchoolSystem {
 			try {
 				PhoneNumber = sc.nextLong();
 				error = false;
-			} catch(InputMismatchException e){
+			} catch(Exception e){
 				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
 				sc.nextLine();
 				error = true;
@@ -150,7 +109,7 @@ public class SchoolSystem {
 			try {
 				StudentNumber = sc.nextInt();
 				error = false;
-			} catch(InputMismatchException e){
+			} catch(Exception e){
 				System.out.println("The value entered has to be digits. Please enter the student's student number:");
 				sc.nextLine();
 				error = true;
@@ -162,18 +121,15 @@ public class SchoolSystem {
 			try {
 				GradeStudent = sc.nextInt();
 				error = false;
-			} catch(InputMismatchException e){
+			} catch(Exception e){
+				System.out.println(e.getMessage());
 				System.out.println("The value entered has to be digits. Please enter the student's grade:");
 				sc.nextLine();
 				error = true;
 			}
 		}while(error == true);
-		Student r = null;
-		try {
-		r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
-		} catch (InvalidInputException e) {
-			System.out.println(e.getMessage());
-		}
+		
+		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
 		return r;
 	}
 
@@ -182,6 +138,13 @@ public class SchoolSystem {
 	 * @param r - the Student to print
 	 */
 	public static void printRecord(Student r) {
-		System.out.println("Student Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity() + "\nPostal Code: " + r.getPostalCode() + "\nProvince: " + r.getProvince() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
+		System.out.println("\nStudent Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity() + "\nPostal Code: " + r.getPostalCode() + "\nProvince: " + r.getProvince() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
+	}
+	
+	private static void printRecords() {
+		for (int i = 0; i < studRecs.size(); i++) {
+			printRecord(studRecs.get(i));
+		}
+		
 	}
 }

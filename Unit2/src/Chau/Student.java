@@ -43,6 +43,11 @@ public class Student {
 		this.setPhoneNumber (phoneNumber);
 	}
 
+	public Student() {
+		super();
+	}
+
+
 	/**
 	 * Returns the first name of this Student
 	 * @return the first name 
@@ -189,7 +194,10 @@ public class Student {
 	 * Sets the grade of the song for this Student
 	 * @param grade the grade to set
 	 */
-	public void setGradeStudent(int gradeStudent) {
+	public void setGradeStudent(int gradeStudent) throws InvalidInputException{
+		if (gradeStudent >=1 && gradeStudent <=12) {
+			throw new InvalidInputException("Invalid Input.");
+		}
 		this.gradeStudent = gradeStudent;
 	}
 
@@ -204,9 +212,7 @@ public class Student {
 	 * Sets the phone number of the song for this Student
 	 * @param phone number the phone number to set
 	 */
-	public void setPhoneNumber(long phoneNumber) throws InvalidInputException{
-		if (phoneNumber <=0 || phoneNumber < 1000000000 || phoneNumber > 999999999)
-			throw new InvalidInputException("Invalid Value.");
+	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
