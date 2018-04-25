@@ -42,7 +42,18 @@ public class Student {
 		this.setGradeStudent (gradeStudent);
 		this.setPhoneNumber (phoneNumber);
 	}
-
+	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province) throws InvalidInputException{
+		super();
+		this.setFirstName (firstName);
+		this.setLastName (lastName);
+		this.setMiddleInitial (middleInitial);
+		this.setEmail (email);
+		this.setStreetAddress (streetAddress);
+		this.setCity (city);
+		this.setPostalCode (postalCode);
+		this.setProvince (province);
+	}
+	
 	public Student() {
 		super();
 	}
@@ -195,7 +206,7 @@ public class Student {
 	 * @param grade the grade to set
 	 */
 	public void setGradeStudent(int gradeStudent) throws InvalidInputException{
-		if (gradeStudent >=1 && gradeStudent <=12) {
+		if (gradeStudent < 1 || gradeStudent >12) {
 			throw new InvalidInputException("Invalid Input.");
 		}
 		this.gradeStudent = gradeStudent;
@@ -215,7 +226,10 @@ public class Student {
 	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	
+	public String toString () {
+		return firstName + "," + lastName; //continue here
+	}
 
 
 }

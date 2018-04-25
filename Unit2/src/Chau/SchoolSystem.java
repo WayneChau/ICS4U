@@ -1,5 +1,8 @@
 package Chau;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,6 +19,7 @@ public class SchoolSystem {
 	static Scanner sc = new Scanner(System.in);
 	static boolean error = false; //if error is repeated
 	static ArrayList <Student> studRecs = new ArrayList <Student>();
+	static Scanner fscan = new Scanner("src/Chau/dataBase.txt");
 
 	/**
 	 * The entry point to the program
@@ -26,7 +30,7 @@ public class SchoolSystem {
 		int option = 0; //command chosen
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
-			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
+			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
 			option = 0;
 			do {
 				try {
@@ -34,7 +38,7 @@ public class SchoolSystem {
 					error = false;
 				} 
 				catch(Exception e){
-					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
 					sc.nextLine();
 					error = true;
 				}
@@ -42,14 +46,14 @@ public class SchoolSystem {
 
 			sc.nextLine();
 			//checks if any of the three options are inputed, reads again to obtain a command
-			while(option != 1 && option != 2 && option != 3) {
-				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
+			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5) {
+				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
 				do {
 					try {
 						option = sc.nextInt();
 						error = false;
 					} catch(Exception e){
-						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit");
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
 						sc.nextLine();
 						error = true;
 					}
@@ -61,6 +65,12 @@ public class SchoolSystem {
 			}
 			if (option == 2){
 				printRecords();
+			}
+			if (option == 4) {
+				saveFile();
+			}
+			if (option == 5) {
+				loadFile();
 			}
 			//quits the program
 		}while (option != 3);
@@ -91,11 +101,13 @@ public class SchoolSystem {
 		String PostalCode = sc.nextLine();
 		System.out.println("Please enter the student's province:");
 		String Province = sc.nextLine();
-		System.out.println("Please enter the student's phone number:");	
-		long PhoneNumber = 0;
+		System.out.println("Please enter the student's phone number:");
+		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province);
+		long phoneNumber = 0;
 		do {
 			try {
-				PhoneNumber = sc.nextLong();
+				phoneNumber = sc.nextLong();
+				r.setPhoneNumber(phoneNumber);
 				error = false;
 			} catch(Exception e){
 				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
@@ -104,10 +116,11 @@ public class SchoolSystem {
 			}
 		}while(error == true);
 		System.out.println("Please enter the student's student number:");
-		int StudentNumber = 0;
+		int studentNumber = 0;
 		do {
 			try {
-				StudentNumber = sc.nextInt();
+				studentNumber = sc.nextInt();
+				r.setStudentNumber(studentNumber);
 				error = false;
 			} catch(Exception e){
 				System.out.println("The value entered has to be digits. Please enter the student's student number:");
@@ -116,10 +129,11 @@ public class SchoolSystem {
 			}
 		}while(error == true);
 		System.out.println("Please enter the student's grade:");
-		int GradeStudent = 0;
+		int gradeStudent = 0;
 		do {
 			try {
-				GradeStudent = sc.nextInt();
+				gradeStudent = sc.nextInt();
+				r.setGradeStudent(gradeStudent);
 				error = false;
 			} catch(Exception e){
 				System.out.println(e.getMessage());
@@ -128,9 +142,8 @@ public class SchoolSystem {
 				error = true;
 			}
 		}while(error == true);
-		
-		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province, StudentNumber, GradeStudent, PhoneNumber);	
-		return r;
+	
+		 return r;
 	}
 
 	/**
@@ -141,10 +154,28 @@ public class SchoolSystem {
 		System.out.println("\nStudent Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity() + "\nPostal Code: " + r.getPostalCode() + "\nProvince: " + r.getProvince() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
 	}
 	
-	private static void printRecords() {
+	public static void printRecords() {
 		for (int i = 0; i < studRecs.size(); i++) {
 			printRecord(studRecs.get(i));
 		}
-		
+	}
+	
+	public static void saveFile() {
+		try {
+			File file = new File ("src/Chau/dataBase.txt");
+			PrintStream fps = new PrintStream(file);
+			for (int i = 0; i < studRecs.size(); i++) {
+				fps.println(studRecs.get(i).toString());
+			}
+			fps.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadFile( ) {
+		String input = fscan.nextLine();
+		String [] data = input.split(",");
+		//String s = new Student(data[0], data[1]);
 	}
 }
