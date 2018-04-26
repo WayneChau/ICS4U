@@ -10,9 +10,8 @@ import java.util.InputMismatchException;
  */
 public class Student {
 
-	private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province;
-	private int studentNumber, gradeStudent;
-	private long phoneNumber;
+	private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province, phoneNumber, studentNumber;
+	private int gradeStudent;
 
 	/**
 	 * Initialize the fields of an object
@@ -28,7 +27,7 @@ public class Student {
 	 * @param gradeStudent - grade the grade to set
 	 * @param phoneNumber - phone number the phone number to set
 	 */
-	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province, int studentNumber, int gradeStudent, long phoneNumber) throws InvalidInputException{
+	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province, String studentNumber, int gradeStudent, String phoneNumber) throws InvalidInputException{
 		super();
 		this.setFirstName (firstName);
 		this.setLastName (lastName);
@@ -183,14 +182,17 @@ public class Student {
 	 * Returns the student number of this Student
 	 * @return the student number 
 	 */
-	public int getStudentNumber() {
+	public String getStudentNumber() {
 		return studentNumber;
 	}
 	/**
 	 * Sets the student number of the song for this Student
 	 * @param student number the student number to set
 	 */
-	public void setStudentNumber(int studentNumber) {
+	public void setStudentNumber(String studentNumber) throws InvalidInputException{
+		if (studentNumber.length() != 9) {
+			throw new InvalidInputException ("Invalid Student Number. Student Number must be 9-digits.");
+		}
 		this.studentNumber = studentNumber;
 	}
 
@@ -207,7 +209,7 @@ public class Student {
 	 */
 	public void setGradeStudent(int gradeStudent) throws InvalidInputException{
 		if (gradeStudent < 1 || gradeStudent >12) {
-			throw new InvalidInputException("Invalid Input.");
+			throw new InvalidInputException("Invalid Grade. Grade must be from 1 to 12.");
 		}
 		this.gradeStudent = gradeStudent;
 	}
@@ -216,19 +218,22 @@ public class Student {
 	 * Returns the phone number of this Student
 	 * @return the phone number 
 	 */
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	/**
 	 * Sets the phone number of the song for this Student
 	 * @param phone number the phone number to set
 	 */
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) throws InvalidInputException{
+		if (phoneNumber.length() != 10) {
+			throw new InvalidInputException ("Invalid Phone Number. Phone Number must be 10-digits.");
+		}
 		this.phoneNumber = phoneNumber;
 	}
 	
 	public String toString () {
-		return firstName + "," + lastName; //continue here
+		return firstName + "," + lastName + "," + middleInitial + "," + email + "," + streetAddress + "," + city + "," + postalCode + "," + province + "," + studentNumber + "," + gradeStudent + "," + phoneNumber;
 	}
 
 

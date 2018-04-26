@@ -103,28 +103,27 @@ public class SchoolSystem {
 		String Province = sc.nextLine();
 		System.out.println("Please enter the student's phone number:");
 		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province);
-		long phoneNumber = 0;
+		String phoneNumber = "";
 		do {
 			try {
-				phoneNumber = sc.nextLong();
+				phoneNumber = sc.nextLine();
 				r.setPhoneNumber(phoneNumber);
 				error = false;
 			} catch(Exception e){
+				System.out.println(e.getMessage()); 
 				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
-				sc.nextLine();
 				error = true;
 			}
 		}while(error == true);
 		System.out.println("Please enter the student's student number:");
-		int studentNumber = 0;
+		String studentNumber = "";
 		do {
 			try {
-				studentNumber = sc.nextInt();
+				studentNumber = sc.nextLine();
 				r.setStudentNumber(studentNumber);
 				error = false;
 			} catch(Exception e){
 				System.out.println("The value entered has to be digits. Please enter the student's student number:");
-				sc.nextLine();
 				error = true;
 			}
 		}while(error == true);
@@ -173,9 +172,16 @@ public class SchoolSystem {
 		}
 	}
 	
-	public static void loadFile( ) {
+	public static void loadFile( ) throws InvalidInputException {
 		String input = fscan.nextLine();
 		String [] data = input.split(",");
-		//String s = new Student(data[0], data[1]);
+		Student s;
+		try {
+			s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]) ;
+			studRecs.add(s);
+			fscan.close();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 }
