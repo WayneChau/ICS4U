@@ -191,7 +191,7 @@ public class Student {
 	 */
 	public void setStudentNumber(String studentNumber) throws InvalidInputException{
 		if (studentNumber.length() != 9) {
-			throw new InvalidInputException ("Invalid Student Number. Student Number must be 9-digits.");
+			throw new InvalidInputException ("Invalid Student Number." + " \nStudent Number must be 9-digits.");
 		}
 		this.studentNumber = studentNumber;
 	}
@@ -209,7 +209,7 @@ public class Student {
 	 */
 	public void setGradeStudent(int gradeStudent) throws InvalidInputException{
 		if (gradeStudent < 1 || gradeStudent >12) {
-			throw new InvalidInputException("Invalid Grade. Grade must be from 1 to 12.");
+			throw new InvalidInputException("Invalid Grade." +  "Grade must be from 1 to 12.");
 		}
 		this.gradeStudent = gradeStudent;
 	}
@@ -227,7 +227,7 @@ public class Student {
 	 */
 	public void setPhoneNumber(String phoneNumber) throws InvalidInputException{
 		if (phoneNumber.length() != 10) {
-			throw new InvalidInputException ("Invalid Phone Number. Phone Number must be 10-digits.");
+			throw new InvalidInputException ("Invalid Phone Number." + "\nPhone Number must be 10-digits.");
 		}
 		this.phoneNumber = phoneNumber;
 	}

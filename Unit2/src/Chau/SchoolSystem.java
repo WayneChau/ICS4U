@@ -68,6 +68,7 @@ public class SchoolSystem {
 			}
 			if (option == 4) {
 				saveFile();
+				System.out.println("Student information saved to File.");
 			}
 			if (option == 5) {
 				loadFile();
@@ -111,7 +112,7 @@ public class SchoolSystem {
 				error = false;
 			} catch(Exception e){
 				System.out.println(e.getMessage()); 
-				System.out.println("The value entered has to be digits. Please enter the student's phone number:");
+				System.out.println("Please enter the student's phone number:");
 				error = true;
 			}
 		}while(error == true);
@@ -123,7 +124,8 @@ public class SchoolSystem {
 				r.setStudentNumber(studentNumber);
 				error = false;
 			} catch(Exception e){
-				System.out.println("The value entered has to be digits. Please enter the student's student number:");
+				System.out.println(e.getMessage());
+				System.out.println("Please enter the student's student number:");
 				error = true;
 			}
 		}while(error == true);
@@ -136,7 +138,7 @@ public class SchoolSystem {
 				error = false;
 			} catch(Exception e){
 				System.out.println(e.getMessage());
-				System.out.println("The value entered has to be digits. Please enter the student's grade:");
+				System.out.println("Please enter the student's grade:");
 				sc.nextLine();
 				error = true;
 			}
@@ -159,10 +161,15 @@ public class SchoolSystem {
 		}
 	}
 	
+	/**
+	 * Saves student information into a text file.
+	 */
 	public static void saveFile() {
 		try {
+			int counter = studRecs.size();
 			File file = new File ("src/Chau/dataBase.txt");
 			PrintStream fps = new PrintStream(file);
+			fps.println(counter);
 			for (int i = 0; i < studRecs.size(); i++) {
 				fps.println(studRecs.get(i).toString());
 			}
@@ -172,15 +179,21 @@ public class SchoolSystem {
 		}
 	}
 	
-	public static void loadFile( ) throws InvalidInputException {
-		String input = fscan.nextLine();
-		String [] data = input.split(",");
+	/**
+	 * Load student information from a text file.
+	 * @throws InvalidInputException
+	 */
+	public static void loadFile( ) throws InvalidInputException{
 		Student s;
 		try {
-			s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]) ;
+			File file = new File ("src/Chau/dataBase.txt");
+			Scanner fscan = new Scanner("src/Chau/dataBase.txt");
+			String input = fscan.nextLine();
+			String [] data = input.split(",");
+			s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
 			studRecs.add(s);
 			fscan.close();
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
