@@ -166,10 +166,9 @@ public class SchoolSystem {
 	 */
 	public static void saveFile() {
 		try {
-			int counter = studRecs.size();
-			File file = new File ("src/Chau/dataBase.txt");
+			File file = new File ("dataBase.txt");
 			PrintStream fps = new PrintStream(file);
-			fps.println(counter);
+			fps.println(studRecs.size());
 			for (int i = 0; i < studRecs.size(); i++) {
 				fps.println(studRecs.get(i).toString());
 			}
@@ -186,8 +185,9 @@ public class SchoolSystem {
 	public static void loadFile( ) throws InvalidInputException{
 		Student s;
 		try {
-			File file = new File ("src/Chau/dataBase.txt");
-			Scanner fscan = new Scanner("src/Chau/dataBase.txt");
+			File file = new File ("dataBase.txt");
+			Scanner fscan = new Scanner(file);
+			fscan.nextLine();
 			String input = fscan.nextLine();
 			String [] data = input.split(",");
 			s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
