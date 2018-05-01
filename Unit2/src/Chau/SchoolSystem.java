@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class SchoolSystem {
 		int option = 0; //command chosen
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
-			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
+			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
 			option = 0;
 			do {
 				try {
@@ -38,7 +39,7 @@ public class SchoolSystem {
 					error = false;
 				} 
 				catch(Exception e){
-					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
 					sc.nextLine();
 					error = true;
 				}
@@ -46,14 +47,14 @@ public class SchoolSystem {
 
 			sc.nextLine();
 			//checks if any of the three options are inputed, reads again to obtain a command
-			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5) {
-				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
+			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
 				do {
 					try {
 						option = sc.nextInt();
 						error = false;
 					} catch(Exception e){
-						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File");
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
 						sc.nextLine();
 						error = true;
 					}
@@ -61,7 +62,7 @@ public class SchoolSystem {
 				sc.nextLine();
 			}
 			if (option == 1){
-				studRecs.add(createRecord()); // creates two new records
+				studRecs.add(createRecord()); // creates new records
 			}
 			if (option == 2){
 				printRecords();
@@ -72,6 +73,10 @@ public class SchoolSystem {
 			}
 			if (option == 5) {
 				loadFile();
+				System.out.println("Student information loaded from File.");
+			}
+			if (option == 6) {
+				Collection.Sort(studRecs);
 			}
 			//quits the program
 		}while (option != 3);
@@ -183,18 +188,18 @@ public class SchoolSystem {
 	 * @throws InvalidInputException
 	 */
 	public static void loadFile( ) throws InvalidInputException{
-		Student s;
 		try {
 			File file = new File ("dataBase.txt");
 			Scanner fscan = new Scanner(file);
 			fscan.nextLine();
 			String input = fscan.nextLine();
 			String [] data = input.split(",");
-			s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
+			Student s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
 			studRecs.add(s);
 			fscan.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 }
