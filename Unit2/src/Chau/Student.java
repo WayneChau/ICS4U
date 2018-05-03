@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
  * April 13th, 2018
  * @author WayneChau
  */
-public class Student {
+public class Student implements Comparable <Student>  {
 
 	private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province, phoneNumber, studentNumber;
 	private int gradeStudent;
@@ -21,13 +21,13 @@ public class Student {
 	 * @param email - email the email to set
 	 * @param streetAddress - street address the street address to set
 	 * @param city - city the city to set
-	 * @param postalCode - postal code the postal code to set
 	 * @param province - province the province to set
+	 * @param postalCode - postal code the postal code to set
 	 * @param studentNumber - student number the student number to set
 	 * @param gradeStudent - grade the grade to set
 	 * @param phoneNumber - phone number the phone number to set
 	 */
-	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province, String studentNumber, int gradeStudent, String phoneNumber) throws InvalidInputException{
+	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String province, String postalCode, String studentNumber, int gradeStudent, String phoneNumber) throws InvalidInputException{
 		super();
 		this.setFirstName (firstName);
 		this.setLastName (lastName);
@@ -35,13 +35,13 @@ public class Student {
 		this.setEmail (email);
 		this.setStreetAddress (streetAddress);
 		this.setCity (city);
-		this.setPostalCode (postalCode);
 		this.setProvince (province);
+		this.setPostalCode (postalCode);
 		this.setStudentNumber (studentNumber);
 		this.setGradeStudent (gradeStudent);
 		this.setPhoneNumber (phoneNumber);
 	}
-	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String postalCode, String province) throws InvalidInputException{
+	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String province) throws InvalidInputException{
 		super();
 		this.setFirstName (firstName);
 		this.setLastName (lastName);
@@ -49,7 +49,6 @@ public class Student {
 		this.setEmail (email);
 		this.setStreetAddress (streetAddress);
 		this.setCity (city);
-		this.setPostalCode (postalCode);
 		this.setProvince (province);
 	}
 	
@@ -66,7 +65,7 @@ public class Student {
 		return firstName;
 	}
 	/**
-	 * Sets the first name of the song for this Student
+	 * Sets the first name of the record for this Student
 	 * @param first name the first name to set
 	 */
 	public void setFirstName(String firstName) {
@@ -81,7 +80,7 @@ public class Student {
 		return lastName;
 	}
 	/**
-	 * Sets the last name of the song for this Student
+	 * Sets the last name of the record for this Student
 	 * @param last name the last name to set
 	 */
 	public void setLastName(String lastName) {
@@ -96,7 +95,7 @@ public class Student {
 		return middleInitial;
 	}
 	/**
-	 * Sets the middle initial of the song for this Student
+	 * Sets the middle initial of the record for this Student
 	 * @param middle initial the middle initial to set
 	 */
 	public void setMiddleInitial(String middleInitial) {
@@ -111,7 +110,7 @@ public class Student {
 		return email;
 	}
 	/**
-	 * Sets the email of the song for this Student
+	 * Sets the email of the record for this Student
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
@@ -126,7 +125,7 @@ public class Student {
 		return streetAddress;
 	}
 	/**
-	 * Sets the street address of the song for this Student
+	 * Sets the street address of the record for this Student
 	 * @param street address the street address to set
 	 */
 	public void setStreetAddress(String streetAddress) {
@@ -141,7 +140,7 @@ public class Student {
 		return city;
 	}
 	/**
-	 * Sets the city of the song for this Student
+	 * Sets the city of the record for this Student
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
@@ -156,10 +155,14 @@ public class Student {
 		return postalCode;
 	}
 	/**
-	 * Sets the postal code of the song for this Student
+	 * Sets the postal code of the record for this Student
 	 * @param postal code the postal code to set
 	 */
-	public void setPostalCode(String postalCode) {
+	public void setPostalCode(String postalCode) throws InvalidInputException{
+		postalCode = postalCode.replaceAll(" ","");
+		if (postalCode.length() !=6 || Character.isDigit(postalCode.charAt(0)) == true || Character.isDigit(postalCode.charAt(1)) == false || Character.isDigit(postalCode.charAt(2)) == true || Character.isDigit(postalCode.charAt(3)) == false || Character.isDigit(postalCode.charAt(4)) == true || Character.isDigit(postalCode.charAt(5)) == false) {
+			throw new InvalidInputException ("Invalid Postal Code. Postal code must be 6 characters long starting with a letter, followed by a number until the postal code is 6 characters long.");
+		}
 		this.postalCode = postalCode;
 	}
 
@@ -171,7 +174,7 @@ public class Student {
 		return province;
 	}
 	/**
-	 * Sets the province of the song for this Student
+	 * Sets the province of the record for this Student
 	 * @param province the province to set
 	 */
 	public void setProvince(String province) {
@@ -233,7 +236,22 @@ public class Student {
 	}
 	
 	public String toString () {
-		return firstName + "," + lastName + "," + middleInitial + "," + email + "," + streetAddress + "," + city + "," + postalCode + "," + province + "," + studentNumber + "," + gradeStudent + "," + phoneNumber;
+		return firstName + "," + lastName + "," + middleInitial + "," + email + "," + streetAddress + "," + city  + "," + province + "," + postalCode + "," + studentNumber + "," + gradeStudent + "," + phoneNumber;
+	}
+	@Override
+	public int compareTo(Student s) {
+		if (this.firstName.compareTo(s.firstName) < 0) {
+			return -1;
+		}
+		else if (this.firstName.compareTo(s.firstName) == 0) {
+			return 0;
+		}
+		else if (this.firstName.compareTo(s.firstName) > 0) {
+			return 1;
+		}
+		return 0;
+		
+		
 	}
 
 

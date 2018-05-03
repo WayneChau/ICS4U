@@ -31,7 +31,7 @@ public class SchoolSystem {
 		int option = 0; //command chosen
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
-			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
+			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
 			option = 0;
 			do {
 				try {
@@ -39,7 +39,7 @@ public class SchoolSystem {
 					error = false;
 				} 
 				catch(Exception e){
-					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
 					sc.nextLine();
 					error = true;
 				}
@@ -48,13 +48,13 @@ public class SchoolSystem {
 			sc.nextLine();
 			//checks if any of the three options are inputed, reads again to obtain a command
 			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
-				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
+				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
 				do {
 					try {
 						option = sc.nextInt();
 						error = false;
 					} catch(Exception e){
-						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress6 - Sort File");
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
 						sc.nextLine();
 						error = true;
 					}
@@ -76,7 +76,7 @@ public class SchoolSystem {
 				System.out.println("Student information loaded from File.");
 			}
 			if (option == 6) {
-				Collection.Sort(studRecs);
+				//Collection.sort(studRecs);
 			}
 			//quits the program
 		}while (option != 3);
@@ -103,12 +103,23 @@ public class SchoolSystem {
 		String StreetAddress = sc.nextLine();
 		System.out.println("Please enter the student's city:");
 		String City = sc.nextLine();
-		System.out.println("Please enter the student's postal code:");
-		String PostalCode = sc.nextLine();
 		System.out.println("Please enter the student's province:");
 		String Province = sc.nextLine();
+		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, Province);
+		System.out.println("Please enter the student's postal code:");
+		String postalCode = "";
+		do {
+			try {
+				postalCode = sc.nextLine();
+				r.setPostalCode(postalCode);
+				error = false;
+			} catch(Exception e){
+				System.out.println(e.getMessage()); 
+				System.out.println("Please enter the student's postal code:");
+				error = true;
+			}
+		}while(error == true);
 		System.out.println("Please enter the student's phone number:");
-		Student r = new Student(FirstName, LastName, MiddleInitial, Email, StreetAddress, City, PostalCode, Province);
 		String phoneNumber = "";
 		do {
 			try {
@@ -157,7 +168,7 @@ public class SchoolSystem {
 	 * @param r - the Student to print
 	 */
 	public static void printRecord(Student r) {
-		System.out.println("\nStudent Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity() + "\nPostal Code: " + r.getPostalCode() + "\nProvince: " + r.getProvince() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
+		System.out.println("\nStudent Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity()  + "\nProvince: " + r.getProvince() + "\nPostal Code: " + r.getPostalCode() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
 	}
 	
 	public static void printRecords() {
@@ -187,7 +198,7 @@ public class SchoolSystem {
 	 * Load student information from a text file.
 	 * @throws InvalidInputException
 	 */
-	public static void loadFile( ) throws InvalidInputException{
+	public static void loadFile( ) {
 		try {
 			File file = new File ("dataBase.txt");
 			Scanner fscan = new Scanner(file);
@@ -201,5 +212,7 @@ public class SchoolSystem {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 }
