@@ -76,7 +76,7 @@ public class SchoolSystem {
 				System.out.println("Student information loaded from File.");
 			}
 			if (option == 6) {
-				//Collection.sort(studRecs);
+				//Collection.sort(ArrayList);
 			}
 			//quits the program
 		}while (option != 3);
