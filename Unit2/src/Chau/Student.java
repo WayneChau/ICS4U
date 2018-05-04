@@ -189,7 +189,7 @@ public class Student implements Comparable <Student>  {
 		return studentNumber;
 	}
 	/**
-	 * Sets the student number of the song for this Student
+	 * Sets the student number of the record for this Student
 	 * @param student number the student number to set
 	 */
 	public void setStudentNumber(String studentNumber) throws InvalidInputException{
@@ -225,7 +225,7 @@ public class Student implements Comparable <Student>  {
 		return phoneNumber;
 	}
 	/**
-	 * Sets the phone number of the song for this Student
+	 * Sets the phone number of the record for this Student
 	 * @param phone number the phone number to set
 	 */
 	public void setPhoneNumber(String phoneNumber) throws InvalidInputException{
@@ -235,23 +235,33 @@ public class Student implements Comparable <Student>  {
 		this.phoneNumber = phoneNumber;
 	}
 	
+	/**
+	 * Separates the information of a student with a comma when saving to a file.
+	 */
 	public String toString () {
 		return firstName + "," + lastName + "," + middleInitial + "," + email + "," + streetAddress + "," + city  + "," + province + "," + postalCode + "," + studentNumber + "," + gradeStudent + "," + phoneNumber;
 	}
+	
+	/**
+	 * Sorting the Students within the school system records.
+	 * @param s - The current student being compared to.
+	 */
 	@Override
 	public int compareTo(Student s) {
-		if (this.firstName.compareTo(s.firstName) < 0) {
-			return -1;
+		//when first name are the same
+		if (this.firstName.compareTo(s.firstName) == 0) {
+			//when last name are the same
+			if (this.lastName.compareTo(s.lastName) == 0) {
+				//student number will never be the same
+				return studentNumber.compareTo(s.studentNumber);
+			}
+			//when last name are different
+			else {
+				return lastName.compareTo(s.lastName);
+			}
 		}
-		else if (this.firstName.compareTo(s.firstName) == 0) {
-			return 0;
-		}
-		else if (this.firstName.compareTo(s.firstName) > 0) {
-			return 1;
-		}
-		return 0;
-		
-		
+		//when first name are different
+		return firstName.compareTo(s.firstName);
 	}
 
 

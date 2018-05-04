@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -29,9 +29,10 @@ public class SchoolSystem {
 	 */
 	public static void main(String[] args) throws InvalidInputException {
 		int option = 0; //command chosen
+		int searchOpt = 0; //search command chosen
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
-			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
+			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
 			option = 0;
 			do {
 				try {
@@ -39,22 +40,21 @@ public class SchoolSystem {
 					error = false;
 				} 
 				catch(Exception e){
-					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
 					sc.nextLine();
 					error = true;
 				}
 			}while(error == true);
-
 			sc.nextLine();
 			//checks if any of the three options are inputed, reads again to obtain a command
-			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
-				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
+			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option != 7) {
+				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
 				do {
 					try {
 						option = sc.nextInt();
 						error = false;
 					} catch(Exception e){
-						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File");
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
 						sc.nextLine();
 						error = true;
 					}
@@ -76,12 +76,48 @@ public class SchoolSystem {
 				System.out.println("Student information loaded from File.");
 			}
 			if (option == 6) {
-				//Collection.sort(ArrayList);
+				Collections.sort(studRecs);
+				System.out.println("Student Record have been sorted.");
 			}
-			//quits the program
-		}while (option != 3);
-		System.out.println("GoodBye, See You Soon!");
+			if (option == 7) {
 
+				do {
+					System.out.println("What would you like to search by?" + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+					searchOpt = 0;
+					do {
+						try {
+							searchOpt = sc.nextInt();
+							error = false;
+						} 
+						catch(Exception e){
+							System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+							sc.nextLine();
+							error = true;
+						}
+					}while(error == true);
+					sc.nextLine();
+					//checks if any of the three options are inputed, reads again to obtain a command
+					while(searchOpt != 1 && searchOpt != 2) {
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+						do {
+							try {
+								option = sc.nextInt();
+								error = false;
+							} catch(Exception e){
+								System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+								sc.nextLine();
+								error = true;
+							}
+						}while(error == true);
+						sc.nextLine();
+					}
+					if (searchOpt == 1) {
+						//int index = Collections.binarySearch(studRecs, Key);
+					}
+				}while (searchOpt == 3);
+			}
+
+		}while(option == 3);
 	}
 
 	/**
@@ -159,8 +195,8 @@ public class SchoolSystem {
 				error = true;
 			}
 		}while(error == true);
-	
-		 return r;
+
+		return r;
 	}
 
 	/**
@@ -170,13 +206,16 @@ public class SchoolSystem {
 	public static void printRecord(Student r) {
 		System.out.println("\nStudent Record: \nFirst Name: " + r.getFirstName() + "\nLast Name: " + r.getLastName() + "\nMiddle Initial: " +r.getMiddleInitial() + "\nEmail: " + r.getEmail() + "\nStreet Address: " + r.getStreetAddress() + "\nCity: " + r.getCity()  + "\nProvince: " + r.getProvince() + "\nPostal Code: " + r.getPostalCode() + "\nStudent Number: " + r.getStudentNumber() + "\nGrade: " + r.getGradeStudent() + "\nPhone Number: " + r.getPhoneNumber());
 	}
-	
+
+	/**
+	 * Prints all students with the Records.
+	 */
 	public static void printRecords() {
 		for (int i = 0; i < studRecs.size(); i++) {
 			printRecord(studRecs.get(i));
 		}
 	}
-	
+
 	/**
 	 * Saves student information into a text file.
 	 */
@@ -193,7 +232,7 @@ public class SchoolSystem {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Load student information from a text file.
 	 * @throws InvalidInputException
@@ -212,7 +251,5 @@ public class SchoolSystem {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }
