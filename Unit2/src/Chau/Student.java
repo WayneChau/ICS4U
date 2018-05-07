@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
  */
 public class Student implements Comparable <Student>  {
 
+
 	private String firstName, lastName, middleInitial, email, streetAddress, city, postalCode, province, phoneNumber, studentNumber;
 	private int gradeStudent;
 

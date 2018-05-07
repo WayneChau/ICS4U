@@ -80,44 +80,52 @@ public class SchoolSystem {
 				System.out.println("Student Record have been sorted.");
 			}
 			if (option == 7) {
-
+				String Key = ""; //first name or student number searched by
+				System.out.println("What would you like to search by?" + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+				searchOpt = 0;
 				do {
-					System.out.println("What would you like to search by?" + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
-					searchOpt = 0;
+					try {
+						searchOpt = sc.nextInt();
+						error = false;
+					} 
+					catch(Exception e){
+						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
+						sc.nextLine();
+						error = true;
+					}
+				}while(error == true);
+				sc.nextLine();
+				//checks if any of the three options are inputed, reads again to obtain a command
+				while(searchOpt != 1 && searchOpt != 2) {
+					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
 					do {
 						try {
-							searchOpt = sc.nextInt();
+							option = sc.nextInt();
 							error = false;
-						} 
-						catch(Exception e){
+						} catch(Exception e){
 							System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
 							sc.nextLine();
 							error = true;
 						}
 					}while(error == true);
 					sc.nextLine();
-					//checks if any of the three options are inputed, reads again to obtain a command
-					while(searchOpt != 1 && searchOpt != 2) {
-						System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
-						do {
-							try {
-								option = sc.nextInt();
-								error = false;
-							} catch(Exception e){
-								System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
-								sc.nextLine();
-								error = true;
-							}
-						}while(error == true);
-						sc.nextLine();
-					}
-					if (searchOpt == 1) {
-						//int index = Collections.binarySearch(studRecs, Key);
-					}
-				}while (searchOpt == 3);
+				}
+				if (searchOpt == 1) {
+					System.out.println("Enter the First Name of the student searched for."); 
+					Key = sc.nextLine();
+					int index = idxKy(Key);
+					printRecord(studRecs.get(index));
+				}
+				if (searchOpt == 2) {
+					System.out.println("Enter the Student Number of the student searched for.");
+					Key = sc.nextLine();
+					int index = idxKy(Key);
+					printRecord(studRecs.get(index));
+				}
 			}
-
-		}while(option == 3);
+		//Quit Program
+		}while(option != 3);
+		System.out.println("Goodbye, See you later!");
 	}
 
 	/**
@@ -241,15 +249,39 @@ public class SchoolSystem {
 		try {
 			File file = new File ("dataBase.txt");
 			Scanner fscan = new Scanner(file);
+			int size = fscan.nextInt();
 			fscan.nextLine();
-			String input = fscan.nextLine();
-			String [] data = input.split(",");
-			Student s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
-			studRecs.add(s);
+			for (int i = 0; i < size; i++) {
+				String input = fscan.nextLine();
+				String [] data = input.split(",");
+				Student s = new Student(data[0], data[1], data[2], data [3], data[4], data[5], data[6], data [7], data[8], Integer.parseInt(data[9]), data[10]);
+				studRecs.add(s);
+			}
 			fscan.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Linear search for the student with the key (information searched by).
+	 * @param Key - The piece of information to identify the student being searched for.
+	 * @return i - index of the student that has the information key.
+	 * @return -1 - when no student in the student records has the information key.
+	 */
+	public static int idxKy(String Key) {
+		for (int i = 0; i < studRecs.size(); i++) {
+			Student stu = studRecs.get(i);
+			//searched by first name
+			if (stu.getFirstName().equals(Key)) {
+				return i;
+			}
+			//searched by student number
+			if (stu.getStudentNumber().equals(Key)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }
