@@ -269,7 +269,69 @@ public class SchoolSystem {
 							System.out.println("Student has been removed from the school record.");
 						}
 						if (doStudent == 3) {
+							//Modify Student information
+							System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+							infoMod = 0;
+							do {
+								try {
+									infoMod = sc.nextInt();
+									error = false;
+								} 
+								catch(Exception e){
+									System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+									sc.nextLine();
+									error = true;
+								}
+							}while(error == true);
+							sc.nextLine();
+							//checks if any of the three options are inputed, reads again to obtain a command
+							while(infoMod != 1 && infoMod != 2 && infoMod != 3) {
+								System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+								do {
+									try {
+										infoMod = sc.nextInt();
+										error = false;
+									} catch(Exception e){
+										System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+										sc.nextLine();
+										error = true;
+									}
+								}while(error == true);
+								sc.nextLine();
+							}
+							if (infoMod == 1) {
+								
+							}
+							if (infoMod == 2) {
 
+							}
+							if (infoMod == 3) {
+
+							}
+							if (infoMod == 4) {
+
+							}
+							if (infoMod == 5) {
+
+							}
+							if (infoMod == 6) {
+
+							}
+							if (infoMod == 7) {
+
+							}
+							if (infoMod == 8) {
+
+							}
+							if (infoMod == 9) {
+
+							}
+							if (infoMod == 10) {
+
+							}
+							if (infoMod == 11) {
+
+							}
 						}
 					}
 					else if (index == -1){
