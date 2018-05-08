@@ -30,6 +30,8 @@ public class SchoolSystem {
 	public static void main(String[] args) throws InvalidInputException {
 		int option = 0; //command chosen
 		int searchOpt = 0; //search command chosen
+		int doStudent = 0; //command to specify what do do with the student information
+		int infoMod = 0; //command to chose which info of the student to modify
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
 			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
@@ -46,7 +48,7 @@ public class SchoolSystem {
 				}
 			}while(error == true);
 			sc.nextLine();
-			//checks if any of the three options are inputed, reads again to obtain a command
+			//checks if any of the seven options are inputed, reads again to obtain a command
 			while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option != 7) {
 				System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
 				do {
@@ -100,7 +102,7 @@ public class SchoolSystem {
 					System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
 					do {
 						try {
-							option = sc.nextInt();
+							searchOpt = sc.nextInt();
 							error = false;
 						} catch(Exception e){
 							System.out.println("Please choose the following options using the digits listed." + "\nPress 1 - First Name" + "\nPress 2 - Student Number");
@@ -114,20 +116,171 @@ public class SchoolSystem {
 					System.out.println("Enter the First Name of the student searched for."); 
 					Key = sc.nextLine();
 					int index = idxKy(Key);
-					printRecord(studRecs.get(index));
+					//if student with key exist
+					if (index != -1) {
+						//what to do with student information
+						System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+						doStudent = 0;
+						do {
+							try {
+								doStudent = sc.nextInt();
+								error = false;
+							} 
+							catch(Exception e){
+								System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+								sc.nextLine();
+								error = true;
+							}
+						}while(error == true);
+						sc.nextLine();
+						//checks if any of the three options are inputed, reads again to obtain a command
+						while(doStudent != 1 && doStudent != 2 && doStudent != 3) {
+							System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+							do {
+								try {
+									doStudent = sc.nextInt();
+									error = false;
+								} catch(Exception e){
+									System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+									sc.nextLine();
+									error = true;
+								}
+							}while(error == true);
+							sc.nextLine();
+						}
+						if (doStudent == 1) {
+							printRecord(studRecs.get(index));
+						}
+						if (doStudent == 2) {
+							studRecs.remove(index);
+							System.out.println("Student has been removed from the school record.");
+						}
+						if (doStudent == 3) {
+							//Modify Student information
+							System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+							infoMod = 0;
+							do {
+								try {
+									infoMod = sc.nextInt();
+									error = false;
+								} 
+								catch(Exception e){
+									System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+									sc.nextLine();
+									error = true;
+								}
+							}while(error == true);
+							sc.nextLine();
+							//checks if any of the three options are inputed, reads again to obtain a command
+							while(infoMod != 1 && infoMod != 2 && infoMod != 3) {
+								System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+								do {
+									try {
+										infoMod = sc.nextInt();
+										error = false;
+									} catch(Exception e){
+										System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
+										sc.nextLine();
+										error = true;
+									}
+								}while(error == true);
+								sc.nextLine();
+							}
+							if (infoMod == 1) {
+								
+							}
+							if (infoMod == 2) {
+
+							}
+							if (infoMod == 3) {
+
+							}
+							if (infoMod == 4) {
+
+							}
+							if (infoMod == 5) {
+
+							}
+							if (infoMod == 6) {
+
+							}
+							if (infoMod == 7) {
+
+							}
+							if (infoMod == 8) {
+
+							}
+							if (infoMod == 9) {
+
+							}
+							if (infoMod == 10) {
+
+							}
+							if (infoMod == 11) {
+
+							}
+						}
+					}
+					else if (index == -1){
+						System.out.println("There are no record of a student with that information searched by.");
+					}
 				}
 				if (searchOpt == 2) {
-					System.out.println("Enter the Student Number of the student searched for.");
+					System.out.println("Enter the First Name of the student searched for."); 
 					Key = sc.nextLine();
 					int index = idxKy(Key);
-					printRecord(studRecs.get(index));
+					//if student with key exist
+					if (index != -1) {
+						//what to do with student information
+						System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+						doStudent = 0;
+						do {
+							try {
+								doStudent = sc.nextInt();
+								error = false;
+							} 
+							catch(Exception e){
+								System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+								sc.nextLine();
+								error = true;
+							}
+						}while(error == true);
+						sc.nextLine();
+						//checks if any of the three options are inputed, reads again to obtain a command
+						while(doStudent != 1 && doStudent != 2 && doStudent != 3) {
+							System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+							do {
+								try {
+									doStudent = sc.nextInt();
+									error = false;
+								} catch(Exception e){
+									System.out.println("What would you like to do with the student?" + "\nPress 1 - Print Student Information" + "\nPress 2 - Delete Student Information" + "\nPress 3 - Modify Information");
+									sc.nextLine();
+									error = true;
+								}
+							}while(error == true);
+							sc.nextLine();
+						}
+						if (doStudent == 1) {
+							printRecord(studRecs.get(index));
+						}
+						if (doStudent == 2) {
+							studRecs.remove(index);
+							System.out.println("Student has been removed from the school record.");
+						}
+						if (doStudent == 3) {
+
+						}
+					}
+					else if (index == -1){
+						System.out.println("There are no record of a student with that information searched by.");
+					}
 				}
 			}
-		//Quit Program
+			//Quit Program
 		}while(option != 3);
-		System.out.println("Goodbye, See you later!");
+		System.out.println("Goodbye, See you next time!");
 	}
-
 	/**
 	 * This method will get the information required to set the fields in
 	 * the record.
@@ -251,6 +404,7 @@ public class SchoolSystem {
 			Scanner fscan = new Scanner(file);
 			int size = fscan.nextInt();
 			fscan.nextLine();
+			//multiple students to be loaded
 			for (int i = 0; i < size; i++) {
 				String input = fscan.nextLine();
 				String [] data = input.split(",");
@@ -281,7 +435,9 @@ public class SchoolSystem {
 				return i;
 			}
 		}
+		//when Key does not exist
 		return -1;
 	}
+	
 
 }

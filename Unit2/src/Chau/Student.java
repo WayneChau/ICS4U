@@ -27,6 +27,7 @@ public class Student implements Comparable <Student>  {
 	 * @param studentNumber - student number the student number to set
 	 * @param gradeStudent - grade the grade to set
 	 * @param phoneNumber - phone number the phone number to set
+	 * @throws InvalidInputException
 	 */
 	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String province, String postalCode, String studentNumber, int gradeStudent, String phoneNumber) throws InvalidInputException{
 		super();
@@ -42,6 +43,18 @@ public class Student implements Comparable <Student>  {
 		this.setGradeStudent (gradeStudent);
 		this.setPhoneNumber (phoneNumber);
 	}
+	
+	/**
+	 * Initialize the fields of an object where error checking are not prevalent
+	 * @param firstName - first name the first name to set
+	 * @param lastName - last name the last name to set
+	 * @param middleInitial - middle initial the middle initial to set
+	 * @param email - email the email to set
+	 * @param streetAddress - street address the street address to set
+	 * @param city - city the city to set
+	 * @param province - province the province to set
+	 * @throws InvalidInputException
+	 */
 	public Student (String firstName, String lastName, String middleInitial, String email, String streetAddress, String city, String province) throws InvalidInputException{
 		super();
 		this.setFirstName (firstName);
@@ -53,6 +66,9 @@ public class Student implements Comparable <Student>  {
 		this.setProvince (province);
 	}
 	
+	/**
+	 * Any missing information will be placed with a null.
+	 */
 	public Student() {
 		super();
 	}
