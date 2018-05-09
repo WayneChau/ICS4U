@@ -31,7 +31,6 @@ public class SchoolSystem {
 		int option = 0; //command chosen
 		int searchOpt = 0; //search command chosen
 		int doStudent = 0; //command to specify what do do with the student information
-		int infoMod = 0; //command to chose which info of the student to modify
 		//do while loops are implemented with try catch in order to use the try catch more than once in case error occur repeatedly
 		do {
 			System.out.println("Press 1 - Enter New Record" + "\nPress 2 - Print All Student to Screen" + "\nPress 3 - Quit" + "\nPress 4 - Save to File" + "\nPress 5 - Load File" + "\nPress 6 - Sort File" + "\nPress 7 - Search For A Student");
@@ -156,71 +155,10 @@ public class SchoolSystem {
 							System.out.println("Student has been removed from the school record.");
 						}
 						if (doStudent == 3) {
-							//Modify Student information
-							System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-							infoMod = 0;
-							do {
-								try {
-									infoMod = sc.nextInt();
-									error = false;
-								} 
-								catch(Exception e){
-									System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-									sc.nextLine();
-									error = true;
-								}
-							}while(error == true);
-							sc.nextLine();
-							//checks if any of the three options are inputed, reads again to obtain a command
-							while(infoMod != 1 && infoMod != 2 && infoMod != 3) {
-								System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-								do {
-									try {
-										infoMod = sc.nextInt();
-										error = false;
-									} catch(Exception e){
-										System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-										sc.nextLine();
-										error = true;
-									}
-								}while(error == true);
-								sc.nextLine();
-							}
-							if (infoMod == 1) {
-								
-							}
-							if (infoMod == 2) {
-
-							}
-							if (infoMod == 3) {
-
-							}
-							if (infoMod == 4) {
-
-							}
-							if (infoMod == 5) {
-
-							}
-							if (infoMod == 6) {
-
-							}
-							if (infoMod == 7) {
-
-							}
-							if (infoMod == 8) {
-
-							}
-							if (infoMod == 9) {
-
-							}
-							if (infoMod == 10) {
-
-							}
-							if (infoMod == 11) {
-
-							}
+							infoModify(studRecs.get(index)); 
 						}
 					}
+					//when student does not exist within the school record
 					else if (index == -1){
 						System.out.println("There are no record of a student with that information searched by.");
 					}
@@ -269,71 +207,10 @@ public class SchoolSystem {
 							System.out.println("Student has been removed from the school record.");
 						}
 						if (doStudent == 3) {
-							//Modify Student information
-							System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-							infoMod = 0;
-							do {
-								try {
-									infoMod = sc.nextInt();
-									error = false;
-								} 
-								catch(Exception e){
-									System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-									sc.nextLine();
-									error = true;
-								}
-							}while(error == true);
-							sc.nextLine();
-							//checks if any of the three options are inputed, reads again to obtain a command
-							while(infoMod != 1 && infoMod != 2 && infoMod != 3) {
-								System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-								do {
-									try {
-										infoMod = sc.nextInt();
-										error = false;
-									} catch(Exception e){
-										System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 3 - Email" + "\nPress 3 - Street Address" + "\nPress 3 - City" + "\nPress 3 - Province" + "\nPress 3 - Postal Code" + "\nPress 3 - Student Number" + "\nPress 3 - Grade" + "\nPress 3 - Phone Number");
-										sc.nextLine();
-										error = true;
-									}
-								}while(error == true);
-								sc.nextLine();
-							}
-							if (infoMod == 1) {
-								
-							}
-							if (infoMod == 2) {
-
-							}
-							if (infoMod == 3) {
-
-							}
-							if (infoMod == 4) {
-
-							}
-							if (infoMod == 5) {
-
-							}
-							if (infoMod == 6) {
-
-							}
-							if (infoMod == 7) {
-
-							}
-							if (infoMod == 8) {
-
-							}
-							if (infoMod == 9) {
-
-							}
-							if (infoMod == 10) {
-
-							}
-							if (infoMod == 11) {
-
-							}
+							infoModify(studRecs.get(index)); 
 						}
 					}
+					//when student does not exist within the school record
 					else if (index == -1){
 						System.out.println("There are no record of a student with that information searched by.");
 					}
@@ -501,5 +378,117 @@ public class SchoolSystem {
 		return -1;
 	}
 	
+	public static void infoModify (Student r) {
+		System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 4 - Email" + "\nPress 5 - Street Address" + "\nPress 6 - City" + "\nPress 7 - Province" + "\nPress 8 - Postal Code" + "\nPress 9 - Student Number" + "\nPress 10 - Grade" + "\nPress 11 - Phone Number");
+		int infoMod = 0; //command to chose which info of the student to modify
+		do {
+			try {
+				infoMod = sc.nextInt();
+				error = false;
+			} 
+			catch(Exception e){
+				System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 4 - Email" + "\nPress 5 - Street Address" + "\nPress 6 - City" + "\nPress 7 - Province" + "\nPress 8 - Postal Code" + "\nPress 9 - Student Number" + "\nPress 10 - Grade" + "\nPress 11 - Phone Number");
+				sc.nextLine();
+				error = true;
+			}
+		}while(error == true);
+		sc.nextLine();
+		//checks if any of the three options are inputed, reads again to obtain a command
+		while(infoMod != 1 && infoMod != 2 && infoMod != 3 && infoMod != 4 && infoMod != 5 && infoMod != 6 && infoMod != 7 && infoMod != 8 && infoMod != 9 && infoMod != 10 && infoMod != 11) {
+			System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 4 - Email" + "\nPress 5 - Street Address" + "\nPress 6 - City" + "\nPress 7 - Province" + "\nPress 8 - Postal Code" + "\nPress 9 - Student Number" + "\nPress 10 - Grade" + "\nPress 11 - Phone Number");
+			do {
+				try {
+					infoMod = sc.nextInt();
+					error = false;
+				} catch(Exception e){
+					System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 4 - Email" + "\nPress 5 - Street Address" + "\nPress 6 - City" + "\nPress 7 - Province" + "\nPress 8 - Postal Code" + "\nPress 9 - Student Number" + "\nPress 10 - Grade" + "\nPress 11 - Phone Number");
+					sc.nextLine();
+					error = true;
+				}
+			}while(error == true);
+			sc.nextLine();
+		}
+		if (infoMod == 1) {
+			System.out.println("Please the first name of the student you would like to change to:");
+			r.setFirstName(sc.nextLine());
+		}
+		if (infoMod == 2) {
+			System.out.println("Please the last name of the student you would like to change to:");
+			r.setLastName(sc.nextLine());
+		}
+		if (infoMod == 3) {
+			System.out.println("Please the middle initial of the student you would like to change to:");
+			r.setMiddleInitial(sc.nextLine());
+		}
+		if (infoMod == 4) {
+			System.out.println("Please the email of the student you would like to change to:");
+			r.setEmail(sc.nextLine());
+		}
+		if (infoMod == 5) {
+			System.out.println("Please the street address of the student you would like to change to:");
+			r.setStreetAddress(sc.nextLine());
+		}
+		if (infoMod == 6) {
+			System.out.println("Please the city of the student you would like to change to:");
+			r.setCity(sc.nextLine());
+		}
+		if (infoMod == 7) {
+			System.out.println("Please the province of the student you would like to change to:");
+			r.setProvince(sc.nextLine());
+		}
+		if (infoMod == 8) {
+			System.out.println("Please the postal code of the student you would like to change to:");
+			do {
+				try {
+					r.setPostalCode(sc.nextLine());
+					error = false;
+				} catch(Exception e){
+					System.out.println(e.getMessage()); 
+					System.out.println("Please the postal code of the student you would like to change to:");
+					error = true;
+				}
+			}while(error == true);
+		}
+		if (infoMod == 9) {
+			System.out.println("Please the student number of the student you would like to change to:");
+			do {
+				try {
+					r.setStudentNumber(sc.nextLine());
+					error = false;
+				} catch(Exception e){
+					System.out.println(e.getMessage());
+					System.out.println("Please the student number of the student you would like to change to:");
+					error = true;
+				}
+			}while(error == true);
+		}
+		if (infoMod == 10) {
+			System.out.println("Please the grade of the student you would like to change to:");
+			do {
+				try {
+					r.setGradeStudent(sc.nextInt());
+					error = false;
+				} catch(Exception e){
+					System.out.println(e.getMessage());
+					System.out.println("Please the grade of the student you would like to change to:");
+					sc.nextLine();
+					error = true;
+				}
+			}while(error == true);
 
+		}
+		if (infoMod == 11) {
+			System.out.println("Please the phone number of the student you would like to change to:");
+			do {
+				try {
+					r.setPhoneNumber(sc.nextLine());
+					error = false;
+				} catch(Exception e){
+					System.out.println(e.getMessage()); 
+					System.out.println("Please the phone number of the student you would like to change to:");
+					error = true;
+				}
+			}while(error == true);
+		}
+	}
 }
