@@ -378,6 +378,11 @@ public class SchoolSystem {
 		return -1;
 	}
 	
+	/**
+	 * Modifies a single information of the student searched for based on what the user desires to change. 
+	 * @param r - The student that was searched for.
+	 * @return void
+	 */
 	public static void infoModify (Student r) {
 		System.out.println("What would you like to modify?" + "\nPress 1 - First Name" + "\nPress 2 - Last Name" + "\nPress 3 - Middle Initial" + "\nPress 4 - Email" + "\nPress 5 - Street Address" + "\nPress 6 - City" + "\nPress 7 - Province" + "\nPress 8 - Postal Code" + "\nPress 9 - Student Number" + "\nPress 10 - Grade" + "\nPress 11 - Phone Number");
 		int infoMod = 0; //command to chose which info of the student to modify
