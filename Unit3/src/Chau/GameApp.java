@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,12 +35,12 @@ public class GameApp extends Application{
 	/**
 	 * The number of balls on the screen.
 	 */
-	final int numBalls = 10;
+	final int numBalls = 100;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
 	 */
-	final int pauseDuration = 10;
+	final int pauseDuration = 40;
 	/**
 	 * An array of balls.
 	 */
@@ -56,38 +55,18 @@ public class GameApp extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Flying Flashing Balls");
 		Group group = new Group();
-        Canvas canvas = new Canvas(500, 500);
+        Canvas canvas = new Canvas(600, 600);
         canvas.setFocusTraversable(true);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
-
-//        /**
-//    	 * the position at which the last mouse down event happened
-//    	 **/
-//    	double x = -1;
-//    	double y = -1;
-
+        PlayerBall playerBall = new PlayerBall(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
+        
         //create the balls for the game
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new Ball(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
 			ball[i].setXSpeed(Math.random() * 16-8);
 			ball[i].setYSpeed(Math.random() * 16-8);
-			ball[i].setColor(new Color( 0, 0, 1, 1.0));
+			ball[i].setColor(new Color( Math.random() , Math.random(), Math.random(), 1.0));
 		}
-		
-//		canvas.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() { //inner class
-//			@Override
-//			public void handle(MouseEvent event) {
-//				x = event.getX();
-//				y = event.getY();
-//				draw(gc);
-//			}
-//		});
-		
-	canvas.setOnKeyPressed(event -> {
-		if (event.getCode() == KeyCode.W){
-			
-	}
-	});
 		
 		//creates a thread to run the game
 		Thread game = new Thread(new Runnable() {
@@ -98,6 +77,7 @@ public class GameApp extends Application{
 			public void run() {
 				while (true) {
 					draw(gc);
+					playerBall.draw(gc);
 					try {
 						Thread.sleep(pauseDuration);
 					} catch (InterruptedException e) {
@@ -105,8 +85,6 @@ public class GameApp extends Application{
 				}
 			}
 		});
-		
-		
 		
         group.getChildren().add(canvas);
         Scene scene = new Scene(group);
@@ -123,9 +101,8 @@ public class GameApp extends Application{
 	 * Clears the screen and paints the balls.
 	 */
 	public void draw(GraphicsContext gc) {
-		gc.setFill(Color.BLACK);
-		gc.fillOval(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-		
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(gc);
 		}

@@ -1,10 +1,11 @@
 package Chau;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
  * Superclass for a generic moving object. This class takes care of the x and y
- * location (should be the center of the object), the x and y speed, the color,
+ * location (should be the centre of the object), the x and y speed, the color,
  * and the top, bottom, left, and right edges of the screen. <br>
  * <br>
  * 

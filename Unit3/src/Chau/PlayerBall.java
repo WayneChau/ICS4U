@@ -1,10 +1,17 @@
 package Chau;
 
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+
 import javafx.scene.canvas.GraphicsContext;
 
-public class PlayerBall extends MovingObject{ 
+/**
+ * This class implements a flashing ball. Feel free to change this, implement a
+ * new object, change the animation, etc. <br><br>December 9, 2007.
+ * 
+ * @author Sam Scott
+ * 
+ */
+public class PlayerBall extends MovingObject {
 	/**
 	 * The radius of the ball.
 	 */
@@ -77,10 +84,9 @@ public class PlayerBall extends MovingObject{
 		gc.fillOval(drawX, drawY, radius * 2, radius * 2);
 		
 		if (!filledIn) {
-			gc.setFill(Color.BLUE);
+			gc.setFill(Color.LIGHTPINK);
 			gc.fillOval(drawX + radius / 2, drawY + radius / 2, radius, radius);
 		}
 
 	}
-
 }
