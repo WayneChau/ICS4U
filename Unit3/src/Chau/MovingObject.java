@@ -99,7 +99,7 @@ public abstract class MovingObject implements Runnable {
 		this.pauseDuration = 40;
 		this.xSpeed = 0;
 		this.ySpeed = 0;
-		this.color = Color.BLACK;
+		this.color = Color.WHITE;
 		this.x = x;
 		this.y = y;
 		this.left = left;

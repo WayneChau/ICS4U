@@ -83,7 +83,7 @@ public class Ball extends MovingObject {
 		gc.setFill(color);
 		gc.fillOval(drawX, drawY, radius * 2, radius * 2);
 		if (!filledIn) {
-			gc.setFill(Color.WHITE);
+			gc.setFill(Color.WHITE); //Flash Colour
 			gc.fillOval(drawX + radius / 2, drawY + radius / 2, radius, radius);
 		}
 

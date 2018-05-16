@@ -1,5 +1,7 @@
 package Chau;
 
+import javax.xml.stream.EventFilter;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -35,7 +39,7 @@ public class GameApp extends Application{
 	/**
 	 * The number of balls on the screen.
 	 */
-	final int numBalls = 100;
+	final int numBalls = 20;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
@@ -59,13 +63,14 @@ public class GameApp extends Application{
         canvas.setFocusTraversable(true);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         PlayerBall playerBall = new PlayerBall(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
+        playerBall.setColor(new Color( 0.5 , 0.5, 0.5, 1.0)); //PlayerBall outside colour
         
         //create the balls for the game
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new Ball(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
 			ball[i].setXSpeed(Math.random() * 16-8);
 			ball[i].setYSpeed(Math.random() * 16-8);
-			ball[i].setColor(new Color( Math.random() , Math.random(), Math.random(), 1.0));
+			ball[i].setColor(new Color( 0 , 0.5, 0.5, 1.0));
 		}
 		
 		//creates a thread to run the game
@@ -86,7 +91,56 @@ public class GameApp extends Application{
 			}
 		});
 		
-        group.getChildren().add(canvas);
+		//Pressed
+		canvas.setOnKeyPressed( event -> {
+			if (event.getCode() == KeyCode.W) {
+				playerBall.setYSpeed(-10);
+			}
+		});
+		canvas.setOnKeyPressed( event -> {
+			if (event.getCode() == KeyCode.S) {
+				playerBall.setYSpeed(10);
+			}
+		});
+		canvas.setOnKeyPressed( event -> {
+			if (event.getCode() == KeyCode.A) {
+				playerBall.setXSpeed(10);
+				
+			}
+		});
+		canvas.setOnKeyPressed( event -> {
+			if (event.getCode() == KeyCode.D) {
+				playerBall.setYSpeed(-10);
+			}
+		});
+		
+		//Released
+		canvas.setOnKeyReleased( event -> {
+			if (event.getCode() == KeyCode.W) {
+				playerBall.setXSpeed(0);
+				playerBall.setYSpeed(0);
+			}
+		});
+		canvas.setOnKeyReleased( event -> {
+			if (event.getCode() == KeyCode.S) {
+				playerBall.setXSpeed(0);
+				playerBall.setYSpeed(0);
+			}
+		});
+		canvas.setOnKeyReleased( event -> {
+			if (event.getCode() == KeyCode.A) {
+				playerBall.setXSpeed(0);
+				playerBall.setYSpeed(0);
+			}
+		});
+		canvas.setOnKeyReleased( event -> {
+			if (event.getCode() == KeyCode.D) {
+				playerBall.setXSpeed(0);
+				playerBall.setYSpeed(0);
+			}
+		});
+		
+		group.getChildren().add(canvas);
         Scene scene = new Scene(group);
         primaryStage.setScene(scene);
         
@@ -101,7 +155,7 @@ public class GameApp extends Application{
 	 * Clears the screen and paints the balls.
 	 */
 	public void draw(GraphicsContext gc) {
-		gc.setFill(Color.WHITE);
+		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(gc);
