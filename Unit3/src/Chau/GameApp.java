@@ -3,6 +3,7 @@ package Chau;
 import javax.xml.stream.EventFilter;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -44,7 +45,7 @@ public class GameApp extends Application{
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
 	 */
-	final int pauseDuration = 40;
+	final int pauseDuration = 20;
 	/**
 	 * An array of balls.
 	 */
@@ -62,8 +63,8 @@ public class GameApp extends Application{
         Canvas canvas = new Canvas(600, 600);
         canvas.setFocusTraversable(true);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
-        PlayerBall playerBall = new PlayerBall(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
-        playerBall.setColor(new Color( 0.5 , 0.5, 0.5, 1.0)); //PlayerBall outside colour
+        PlayerBall playerBall = new PlayerBall(500, 500, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
+        playerBall.setColor(new Color( 0.5 , 0.5, 0.5, 1.0)); //PlayerBall outside color
         
         //create the balls for the game
 		for (int i = 0; i < numBalls; i++) {
@@ -83,6 +84,9 @@ public class GameApp extends Application{
 				while (true) {
 					draw(gc);
 					playerBall.draw(gc);
+					if (collisionBall(gc, playerBall) == true) {
+						Platform.exit();
+					}
 					try {
 						Thread.sleep(pauseDuration);
 					} catch (InterruptedException e) {
@@ -96,21 +100,14 @@ public class GameApp extends Application{
 			if (event.getCode() == KeyCode.W) {
 				playerBall.setYSpeed(-10);
 			}
-		});
-		canvas.setOnKeyPressed( event -> {
 			if (event.getCode() == KeyCode.S) {
 				playerBall.setYSpeed(10);
 			}
-		});
-		canvas.setOnKeyPressed( event -> {
 			if (event.getCode() == KeyCode.A) {
-				playerBall.setXSpeed(10);
-				
+				playerBall.setXSpeed(-10);
 			}
-		});
-		canvas.setOnKeyPressed( event -> {
 			if (event.getCode() == KeyCode.D) {
-				playerBall.setYSpeed(-10);
+				playerBall.setXSpeed(10);
 			}
 		});
 		
@@ -120,25 +117,20 @@ public class GameApp extends Application{
 				playerBall.setXSpeed(0);
 				playerBall.setYSpeed(0);
 			}
-		});
-		canvas.setOnKeyReleased( event -> {
 			if (event.getCode() == KeyCode.S) {
 				playerBall.setXSpeed(0);
 				playerBall.setYSpeed(0);
 			}
-		});
-		canvas.setOnKeyReleased( event -> {
 			if (event.getCode() == KeyCode.A) {
 				playerBall.setXSpeed(0);
 				playerBall.setYSpeed(0);
 			}
-		});
-		canvas.setOnKeyReleased( event -> {
 			if (event.getCode() == KeyCode.D) {
 				playerBall.setXSpeed(0);
 				playerBall.setYSpeed(0);
 			}
 		});
+		
 		
 		group.getChildren().add(canvas);
         Scene scene = new Scene(group);
@@ -149,6 +141,15 @@ public class GameApp extends Application{
 		
 	}
 	
+	public boolean collisionBall (GraphicsContext gc, PlayerBall playerBall) {
+		for (int i = 0; i < numBalls; i++) {
+			if (playerBall.x >= playerBall.x && ball[i].x <= playerBall.x && ball[i].x >= playerBall.radius &&
+					ball[i].y >= playerBall.y && ball[i].y <= playerBall.y && ball[i].y >= playerBall.radius) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 
 	/**
@@ -163,6 +164,7 @@ public class GameApp extends Application{
 
 		gc.drawImage(buffer, 0, 0); // double buffering
 	}
+	
 	
 	
 }
