@@ -1,5 +1,9 @@
 package Chau;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.xml.stream.EventFilter;
 
 import javafx.application.Application;
@@ -30,6 +34,8 @@ import javafx.stage.Stage;
  * 
  * @author Sam Scott
  */
+
+
 @SuppressWarnings("serial")
 public class GameApp extends Application{
 
@@ -49,16 +55,16 @@ public class GameApp extends Application{
 	/**
 	 * An array of balls.
 	 */
-	Ball[] ball = new Ball[numBalls];
-	
-	
+	//Ball[] ball = new Ball[numBalls];
+    ArrayList <Ball> ball  = new ArrayList<Ball>(); 
+    Timer time = new Timer();
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Flying Flashing Balls");
+		primaryStage.setTitle("Dodge Ball");
 		Group group = new Group();
         Canvas canvas = new Canvas(600, 600);
         canvas.setFocusTraversable(true);
@@ -68,10 +74,12 @@ public class GameApp extends Application{
         
         //create the balls for the game
 		for (int i = 0; i < numBalls; i++) {
-			ball[i] = new Ball(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
-			ball[i].setXSpeed(Math.random() * 16-8);
-			ball[i].setYSpeed(Math.random() * 16-8);
-			ball[i].setColor(new Color( 0 , 0.5, 0.5, 1.0));
+			
+			Ball b = new Ball(50, 50, 0, (int)canvas.getWidth(), 0, (int)canvas.getHeight());
+			ball.add(b);
+			ball.get(i).setXSpeed(Math.random() * 16-8);
+			ball.get(i).setYSpeed(Math.random() * 16-8);
+			ball.get(i).setColor(new Color( 0 , 0.5, 0.5, 1.0));
 		}
 		
 		//creates a thread to run the game
@@ -84,9 +92,6 @@ public class GameApp extends Application{
 				while (true) {
 					draw(gc);
 					playerBall.draw(gc);
-					if (collisionBall(gc, playerBall) == true) {
-						Platform.exit();
-					}
 					try {
 						Thread.sleep(pauseDuration);
 					} catch (InterruptedException e) {
@@ -110,7 +115,15 @@ public class GameApp extends Application{
 				playerBall.setXSpeed(10);
 			}
 		});
-		
+		time.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+//				collisionBall(playerBall.getX(),playerBall.getY());
+			}
+			
+		}, 1, 1);
 		//Released
 		canvas.setOnKeyReleased( event -> {
 			if (event.getCode() == KeyCode.W) {
@@ -141,14 +154,22 @@ public class GameApp extends Application{
 		
 	}
 	
-	public boolean collisionBall (GraphicsContext gc, PlayerBall playerBall) {
-		for (int i = 0; i < numBalls; i++) {
-			if (playerBall.x >= playerBall.x && ball[i].x <= playerBall.x && ball[i].x >= playerBall.radius &&
-					ball[i].y >= playerBall.y && ball[i].y <= playerBall.y && ball[i].y >= playerBall.radius) {
-				return true;
+	public void collisionBall (double x, double y) {
+		int counter = 0;
+		for (int i = 0; i < ball.size(); i++) {
+//			System.out.println("Position: " + playerBall.getX() + "," + playerBall.getY());
+//			System.out.println("Position: " + ball.get(i).getX() + "," + ball.get(i).getY());
+			if (x >= ball.get(i).getX() && x <= (ball.get(i).getX() +  ball.get(i).getRadius()*2) &&
+				y >= ball.get(i).getY() && y <= (ball.get(i).getY() + ball.get(i).getRadius()*2)) {
+					System.out.println("HIT!!");
+					counter++;
+			
+			}
+			if (counter == 3) {
+				Platform.exit();
+
 			}
 		}
-		return false;
 	}
 
 
@@ -159,7 +180,7 @@ public class GameApp extends Application{
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 		for (int i = 0; i < numBalls; i++) {
-			ball[i].draw(gc);
+			ball.get(i).draw(gc);
 		}
 
 		gc.drawImage(buffer, 0, 0); // double buffering
