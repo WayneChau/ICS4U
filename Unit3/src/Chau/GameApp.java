@@ -57,14 +57,14 @@ public class GameApp extends Application{
 	 */
 	//Ball[] ball = new Ball[numBalls];
     ArrayList <Ball> ball  = new ArrayList<Ball>(); 
-    Timer time = new Timer();
+    int counter = 0;//three lives
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Dodge Ball");
+		primaryStage.setTitle("Dodge Ball - 3 Lives, after 3 the games end!");
 		Group group = new Group();
         Canvas canvas = new Canvas(600, 600);
         canvas.setFocusTraversable(true);
@@ -92,6 +92,7 @@ public class GameApp extends Application{
 				while (true) {
 					draw(gc);
 					playerBall.draw(gc);
+					collisionBall(playerBall,canvas);
 					try {
 						Thread.sleep(pauseDuration);
 					} catch (InterruptedException e) {
@@ -115,15 +116,7 @@ public class GameApp extends Application{
 				playerBall.setXSpeed(10);
 			}
 		});
-		time.schedule(new TimerTask() {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-//				collisionBall(playerBall.getX(),playerBall.getY());
-			}
-			
-		}, 1, 1);
 		//Released
 		canvas.setOnKeyReleased( event -> {
 			if (event.getCode() == KeyCode.W) {
@@ -154,20 +147,23 @@ public class GameApp extends Application{
 		
 	}
 	
-	public void collisionBall (double x, double y) {
-		int counter = 0;
+	public void collisionBall (PlayerBall playerBall, Canvas canvas) {
+		
+		double xpMid = playerBall.getX() + playerBall.getRadius();
+		double ypMid = playerBall.getY() + playerBall.getRadius();
 		for (int i = 0; i < ball.size(); i++) {
-//			System.out.println("Position: " + playerBall.getX() + "," + playerBall.getY());
-//			System.out.println("Position: " + ball.get(i).getX() + "," + ball.get(i).getY());
-			if (x >= ball.get(i).getX() && x <= (ball.get(i).getX() +  ball.get(i).getRadius()*2) &&
-				y >= ball.get(i).getY() && y <= (ball.get(i).getY() + ball.get(i).getRadius()*2)) {
+			double xbMid = ball.get(i).getX() + ball.get(i).getRadius();
+			double ybMid = ball.get(i).getY() + ball.get(i).getRadius();
+			double dist = Math.sqrt(Math.pow(xpMid-xbMid,2) + Math.pow(ypMid-ybMid,2));
+			if (dist <= playerBall.getRadius() + ball.get(i).getRadius()) {
+					ball.get(i).setX((int)(Math.random()*canvas.getWidth()));
+					ball.get(i).setY((int)(Math.random()*canvas.getHeight()));
 					System.out.println("HIT!!");
 					counter++;
-			
 			}
 			if (counter == 3) {
 				Platform.exit();
-
+				System.exit(0);
 			}
 		}
 	}
@@ -182,8 +178,6 @@ public class GameApp extends Application{
 		for (int i = 0; i < numBalls; i++) {
 			ball.get(i).draw(gc);
 		}
-
-		gc.drawImage(buffer, 0, 0); // double buffering
 	}
 	
 	
