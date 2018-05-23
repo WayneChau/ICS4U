@@ -64,7 +64,7 @@ public class GameApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Dodge Ball - 3 Lives, after 3 the games end!");
+		primaryStage.setTitle("Dodge Ball - 3 Lives, after 3 hits the games ends!");
 		Group group = new Group();
         Canvas canvas = new Canvas(600, 600);
         canvas.setFocusTraversable(true);
